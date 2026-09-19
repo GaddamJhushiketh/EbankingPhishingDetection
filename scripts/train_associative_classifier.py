@@ -14,10 +14,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 
 from app.ml.associative_classifier import AssociativeClassifier
-from app.ml.preprocessing import TARGET_LABELS, TARGET_COLUMN, validate_training_frame
+from app.ml.preprocessing import FEATURE_COLUMNS, TARGET_LABELS, TARGET_COLUMN, validate_training_frame
 
 
 def stratified_split(frame: pd.DataFrame, test_size: float, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Strategy A: historical row-level stratified split (kept for comparison)."""
     train_parts, test_parts = [], []
     for label, group in frame.groupby(TARGET_COLUMN, sort=True):
         shuffled = group.sample(frac=1, random_state=seed + int(label) + 100)
@@ -28,6 +29,85 @@ def stratified_split(frame: pd.DataFrame, test_size: float, seed: int) -> tuple[
         pd.concat(train_parts).sample(frac=1, random_state=seed).reset_index(drop=True),
         pd.concat(test_parts).sample(frac=1, random_state=seed + 1).reset_index(drop=True),
     )
+
+
+def _choose_group_counts(sizes: list[int], target: int, seed: int) -> set[int]:
+    """Choose a deterministic subset of group positions closest to ``target``."""
+    order = list(pd.Series(range(len(sizes))).sample(frac=1, random_state=seed))
+    # Dynamic programming over record counts gives a closer 80/20 split than
+    # selecting groups greedily, while retaining the seeded tie-breaking order.
+    choices: dict[int, tuple[int, ...]] = {0: ()}
+    for position in order:
+        size = sizes[position]
+        for total, selected in list(choices.items())[::-1]:
+            new_total = total + size
+            if new_total not in choices:
+                choices[new_total] = selected + (position,)
+    best = min(choices, key=lambda total: (abs(total - target), total > target))
+    return set(choices[best])
+
+
+def exact_record_group_split(
+    frame: pd.DataFrame, test_size: float = 0.2, seed: int = 42
+) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Split exact feature+target records so no duplicate record crosses splits."""
+    validated = validate_training_frame(frame).reset_index(drop=True)
+    group_columns = list(FEATURE_COLUMNS) + [TARGET_COLUMN]
+    grouped = validated.groupby(group_columns, sort=True, dropna=False)
+    groups = list(grouped.indices.items())
+    test_indices: set[int] = set()
+    for label in sorted(TARGET_LABELS):
+        labelled = [(key, indices) for key, indices in groups if int(key[-1]) == label]
+        if len(labelled) <= 1:
+            continue
+        sizes = [len(indices) for _, indices in labelled]
+        target = min(max(1, round(sum(sizes) * test_size)), sum(sizes) - 1)
+        selected = _choose_group_counts(sizes, target, seed + label + 100)
+        for position in selected:
+            test_indices.update(labelled[position][1])
+    test_mask = validated.index.isin(test_indices)
+    train = validated.loc[~test_mask].sample(frac=1, random_state=seed).reset_index(drop=True)
+    test = validated.loc[test_mask].sample(frac=1, random_state=seed + 1).reset_index(drop=True)
+    train_keys = set(map(tuple, train[group_columns].itertuples(index=False, name=None)))
+    test_keys = set(map(tuple, test[group_columns].itertuples(index=False, name=None)))
+    feature_keys = list(FEATURE_COLUMNS)
+    train_features = set(map(tuple, train[feature_keys].itertuples(index=False, name=None)))
+    test_features = set(map(tuple, test[feature_keys].itertuples(index=False, name=None)))
+    shared_features = train_features & test_features
+    distributions = []
+    all_feature_groups = validated.groupby(feature_keys, sort=True, dropna=False)
+    for feature_key, feature_group in all_feature_groups:
+        key = tuple(feature_key) if isinstance(feature_key, tuple) else (feature_key,)
+        if key not in shared_features:
+            continue
+        distributions.append({
+            "features": [int(value) for value in key],
+            "train": {str(k): int(v) for k, v in train.loc[
+                train[feature_keys].apply(tuple, axis=1) == key, TARGET_COLUMN
+            ].value_counts().to_dict().items()},
+            "test": {str(k): int(v) for k, v in test.loc[
+                test[feature_keys].apply(tuple, axis=1) == key, TARGET_COLUMN
+            ].value_counts().to_dict().items()},
+            "conflicting_labels": feature_group[TARGET_COLUMN].nunique() > 1,
+        })
+    analysis = {
+        "exact_record_groups_total": len(groups),
+        "exact_record_groups_train": len(train_keys),
+        "exact_record_groups_test": len(test_keys),
+        "shared_exact_records": len(train_keys & test_keys),
+        "feature_only_groups_total": len(set(map(tuple, validated[feature_keys].itertuples(index=False, name=None)))),
+        "feature_only_groups_train": len(train_features),
+        "feature_only_groups_test": len(test_features),
+        "feature_only_groups_shared": len(shared_features),
+        "feature_only_conflicting_groups_total": int(
+            sum(group[TARGET_COLUMN].nunique() > 1 for _, group in all_feature_groups)
+        ),
+        "feature_only_conflicting_groups_shared": int(sum(
+            item["conflicting_labels"] for item in distributions
+        )),
+        "shared_feature_group_label_distributions": distributions,
+    }
+    return train, test, analysis
 
 
 def metrics(y_true: list[int], y_pred: list[int]) -> dict:
@@ -105,7 +185,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     frame = validate_training_frame(pd.read_csv(args.data))
-    train, test = stratified_split(frame, args.test_size, args.seed)
+    train, test, group_analysis = exact_record_group_split(frame, args.test_size, args.seed)
     y_true = test[TARGET_COLUMN].astype(int).tolist()
     test_records = test.drop(columns=[TARGET_COLUMN]).to_dict("records")
     thresholds = sorted({
@@ -153,10 +233,45 @@ def main() -> None:
         "min_confidence": selected_threshold,
         "rationale": "Highest test macro-F1; ties resolved by accuracy, then higher confidence threshold.",
     }
+    # Strategy A remains available as a clearly labelled historical,
+    # row-level baseline; it is not used to select or persist the model.
+    baseline_train, baseline_test = stratified_split(frame, args.test_size, args.seed)
+    baseline_model = AssociativeClassifier(
+        args.min_support, selected_threshold, args.min_lift, random_state=args.seed
+    ).fit(baseline_train)
+    baseline_metrics = metrics(
+        baseline_test[TARGET_COLUMN].astype(int).tolist(),
+        baseline_model.predict(baseline_test),
+    )
+    result["historical_baseline_strategy_a"] = {
+        "evaluation_strategy": "row_stratified_historical_baseline",
+        "description": "Historical row-level stratified split retained for comparison only.",
+        "accuracy": baseline_metrics["accuracy"],
+        "macro_f1": baseline_metrics["macro_avg"]["f1"],
+        "n_train": len(baseline_train),
+        "n_test": len(baseline_test),
+    }
+    result["feature_only_group_analysis"] = group_analysis
     output = Path(args.models_dir)
     output.mkdir(parents=True, exist_ok=True)
+    model.metadata = {
+        "evaluation_strategy": "exact_record_group_aware",
+        "random_seed": args.seed,
+        "test_size_target": args.test_size,
+        "duplicate_leakage_prevented": True,
+        "shared_exact_records": group_analysis["shared_exact_records"],
+    }
     model.save(output / "associative_classifier.pkl")
-    result.update({"seed": args.seed, "n_train": len(train), "n_rules": len(model.rules)})
+    result.update({
+        "evaluation_strategy": "exact_record_group_aware",
+        "random_seed": args.seed,
+        "test_size_target": args.test_size,
+        "duplicate_leakage_prevented": True,
+        "shared_exact_records": group_analysis["shared_exact_records"],
+        "seed": args.seed,
+        "n_train": len(train),
+        "n_rules": len(model.rules),
+    })
     (output / "evaluation.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     pd.DataFrame(model.rules).to_csv(output / "association_rules.csv", index=False)
     print(json.dumps(result, indent=2))

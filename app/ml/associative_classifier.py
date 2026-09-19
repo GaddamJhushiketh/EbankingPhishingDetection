@@ -52,6 +52,9 @@ class AssociativeClassifier:
         self.n_samples: int = 0
         self.frequent_itemset_count: int = 0
         self.generated_rule_count: int = 0
+        # Training/evaluation provenance is populated by the Phase 4 training
+        # script; classifier behavior and feature encoding remain unchanged.
+        self.metadata: dict = {}
 
     @staticmethod
     def _transactions(frame: pd.DataFrame) -> list[list[str]]:

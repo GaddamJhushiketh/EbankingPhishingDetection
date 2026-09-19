@@ -1,5 +1,5 @@
 {
-  "accuracy": 0.8523985239852399,
+  "accuracy": 0.7822878228782287,
   "confusion_matrix": {
     "labels": [
       -1,
@@ -8,109 +8,109 @@
     ],
     "counts": {
       "-1": {
-        "-1": 133,
+        "-1": 119,
         "0": 0,
-        "1": 7
+        "1": 21
       },
       "0": {
-        "-1": 6,
-        "0": 1,
-        "1": 14
+        "-1": 12,
+        "0": 4,
+        "1": 5
       },
       "1": {
-        "-1": 12,
-        "0": 1,
-        "1": 97
+        "-1": 21,
+        "0": 0,
+        "1": 89
       }
     }
   },
   "classification_report": {
     "-1": {
-      "precision": 0.8807947019867549,
-      "recall": 0.95,
-      "f1": 0.9140893470790377,
+      "precision": 0.7828947368421053,
+      "recall": 0.85,
+      "f1": 0.8150684931506849,
       "support": 140
     },
     "0": {
-      "precision": 0.5,
-      "recall": 0.047619047619047616,
-      "f1": 0.08695652173913042,
+      "precision": 1.0,
+      "recall": 0.19047619047619047,
+      "f1": 0.32,
       "support": 21
     },
     "1": {
-      "precision": 0.8220338983050848,
-      "recall": 0.8818181818181818,
-      "f1": 0.8508771929824562,
+      "precision": 0.7739130434782608,
+      "recall": 0.8090909090909091,
+      "f1": 0.7911111111111111,
       "support": 110
     },
     "macro avg": {
-      "precision": 0.7342762000972799,
-      "recall": 0.6264790764790765,
-      "f1": 0.6173076872668748
+      "precision": 0.8522692601067887,
+      "recall": 0.6165223665223665,
+      "f1": 0.6420598680872653
     },
     "weighted avg": {
-      "precision": 0.8274353767221587,
-      "recall": 0.8523985239852399,
-      "f1": 0.8243361135633107
+      "precision": 0.796072686127319,
+      "recall": 0.7822878228782287,
+      "f1": 0.7669808533701776
     }
   },
   "macro_avg": {
-    "precision": 0.7342762000972799,
-    "recall": 0.6264790764790765,
-    "f1": 0.6173076872668748
+    "precision": 0.8522692601067887,
+    "recall": 0.6165223665223665,
+    "f1": 0.6420598680872653
   },
   "classes": {
     "-1": {
-      "precision": 0.8807947019867549,
-      "recall": 0.95,
-      "f1": 0.9140893470790377,
+      "precision": 0.7828947368421053,
+      "recall": 0.85,
+      "f1": 0.8150684931506849,
       "support": 140
     },
     "0": {
-      "precision": 0.5,
-      "recall": 0.047619047619047616,
-      "f1": 0.08695652173913042,
+      "precision": 1.0,
+      "recall": 0.19047619047619047,
+      "f1": 0.32,
       "support": 21
     },
     "1": {
-      "precision": 0.8220338983050848,
-      "recall": 0.8818181818181818,
-      "f1": 0.8508771929824562,
+      "precision": 0.7739130434782608,
+      "recall": 0.8090909090909091,
+      "f1": 0.7911111111111111,
       "support": 110
     }
   },
   "n_test": 271,
   "unmatched_test_count": 0,
   "rule_characteristics": {
-    "count": 8102,
+    "count": 8441,
     "support": {
       "min": 0.010166358595194085,
-      "max": 0.4722735674676525,
-      "mean": 0.027215160127961834,
+      "max": 0.47412199630314233,
+      "mean": 0.028021401569357906,
       "median": 0.018484288354898338
     },
     "confidence": {
       "min": 0.7,
       "max": 1.0,
-      "mean": 0.9058867853920121,
-      "median": 0.9259259259259259
+      "mean": 0.9163300033157213,
+      "median": 0.9411764705882352
     },
     "lift": {
       "min": 1.3476868327402134,
       "max": 13.195121951219512,
-      "mean": 1.9950514885882111,
+      "mean": 2.0262548124069775,
       "median": 1.9252669039145907
     },
     "antecedent_length": {
       "min": 1.0,
-      "max": 8.0,
-      "mean": 4.823994075536905,
+      "max": 9.0,
+      "mean": 4.883900011846937,
       "median": 5.0
     }
   },
-  "frequent_itemsets": 24511,
-  "generated_association_rules": 77352,
-  "filtered_classification_rules": 8102,
+  "frequent_itemsets": 24559,
+  "generated_association_rules": 89485,
+  "filtered_classification_rules": 8441,
   "top_classification_rules": [
     {
       "antecedent": [
@@ -137,99 +137,104 @@
     },
     {
       "antecedent": [
-        "Request_URL=0",
-        "SFH=0",
-        "SSLfinal_State=0",
-        "URL_of_Anchor=0",
-        "having_IP_Address=0"
-      ],
-      "consequent": "Result=Suspicious",
-      "support": 0.011090573012939002,
-      "confidence": 1.0,
-      "lift": 13.195121951219512
-    },
-    {
-      "antecedent": [
-        "SFH=0",
-        "SSLfinal_State=0",
-        "URL_of_Anchor=0",
-        "having_IP_Address=0"
-      ],
-      "consequent": "Result=Suspicious",
-      "support": 0.011090573012939002,
-      "confidence": 1.0,
-      "lift": 13.195121951219512
-    },
-    {
-      "antecedent": [
-        "Request_URL=0",
-        "SFH=0",
-        "SSLfinal_State=0",
-        "URL_of_Anchor=0",
-        "age_of_domain=1"
-      ],
-      "consequent": "Result=Suspicious",
-      "support": 0.010166358595194085,
-      "confidence": 1.0,
-      "lift": 13.195121951219512
-    },
-    {
-      "antecedent": [
-        "SFH=0",
-        "SSLfinal_State=0",
-        "URL_of_Anchor=0",
-        "age_of_domain=1"
-      ],
-      "consequent": "Result=Suspicious",
-      "support": 0.010166358595194085,
-      "confidence": 1.0,
-      "lift": 13.195121951219512
-    },
-    {
-      "antecedent": [
         "Request_URL=-1",
-        "SFH=-1",
-        "SSLfinal_State=-1",
-        "having_IP_Address=0"
-      ],
-      "consequent": "Result=Legitimate",
-      "support": 0.07578558225508318,
-      "confidence": 1.0,
-      "lift": 2.470319634703196
-    },
-    {
-      "antecedent": [
-        "Request_URL=-1",
-        "SFH=-1",
-        "SSLfinal_State=-1",
+        "SSLfinal_State=1",
+        "URL_Length=1",
         "URL_of_Anchor=-1",
-        "having_IP_Address=0"
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
       ],
-      "consequent": "Result=Legitimate",
-      "support": 0.06284658040665435,
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
       "confidence": 1.0,
-      "lift": 2.470319634703196
+      "lift": 13.195121951219512
     },
     {
       "antecedent": [
         "Request_URL=0",
         "SFH=0",
-        "URL_of_Anchor=1"
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
       ],
-      "consequent": "Result=Legitimate",
-      "support": 0.06284658040665435,
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
       "confidence": 1.0,
-      "lift": 2.470319634703196
+      "lift": 13.195121951219512
     },
     {
       "antecedent": [
         "Request_URL=0",
         "SFH=0",
-        "URL_of_Anchor=1",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010166358595194085,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010166358595194085,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
         "having_IP_Address=0"
       ],
       "consequent": "Result=Legitimate",
-      "support": 0.05545286506469501,
+      "support": 0.0878003696857671,
       "confidence": 1.0,
       "lift": 2.470319634703196
     }
@@ -237,29 +242,29 @@
   "threshold_experiments": [
     {
       "min_confidence": 0.3,
-      "frequent_itemsets": 24511,
-      "generated_association_rules": 355121,
-      "n_rules": 10300,
-      "accuracy": 0.8523985239852399,
-      "macro_f1": 0.6173076872668748,
+      "frequent_itemsets": 24559,
+      "generated_association_rules": 398789,
+      "n_rules": 10422,
+      "accuracy": 0.7822878228782287,
+      "macro_f1": 0.6420598680872653,
       "unmatched_test_count": 0
     },
     {
       "min_confidence": 0.5,
-      "frequent_itemsets": 24511,
-      "generated_association_rules": 168974,
-      "n_rules": 9893,
-      "accuracy": 0.8523985239852399,
-      "macro_f1": 0.6173076872668748,
+      "frequent_itemsets": 24559,
+      "generated_association_rules": 193078,
+      "n_rules": 10046,
+      "accuracy": 0.7822878228782287,
+      "macro_f1": 0.6420598680872653,
       "unmatched_test_count": 0
     },
     {
       "min_confidence": 0.7,
-      "frequent_itemsets": 24511,
-      "generated_association_rules": 77352,
-      "n_rules": 8102,
-      "accuracy": 0.8523985239852399,
-      "macro_f1": 0.6173076872668748,
+      "frequent_itemsets": 24559,
+      "generated_association_rules": 89485,
+      "n_rules": 8441,
+      "accuracy": 0.7822878228782287,
+      "macro_f1": 0.6420598680872653,
       "unmatched_test_count": 0
     }
   ],
@@ -267,7 +272,514 @@
     "min_confidence": 0.7,
     "rationale": "Highest test macro-F1; ties resolved by accuracy, then higher confidence threshold."
   },
+  "historical_baseline_strategy_a": {
+    "evaluation_strategy": "row_stratified_historical_baseline",
+    "description": "Historical row-level stratified split retained for comparison only.",
+    "accuracy": 0.8523985239852399,
+    "macro_f1": 0.6173076872668748,
+    "n_train": 1082,
+    "n_test": 271
+  },
+  "feature_only_group_analysis": {
+    "exact_record_groups_total": 724,
+    "exact_record_groups_train": 572,
+    "exact_record_groups_test": 152,
+    "shared_exact_records": 0,
+    "feature_only_groups_total": 676,
+    "feature_only_groups_train": 550,
+    "feature_only_groups_test": 150,
+    "feature_only_groups_shared": 24,
+    "feature_only_conflicting_groups_total": 48,
+    "feature_only_conflicting_groups_shared": 24,
+    "shared_feature_group_label_distributions": [
+      {
+        "features": [
+          -1,
+          -1,
+          0,
+          -1,
+          -1,
+          -1,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "0": 2
+        },
+        "test": {
+          "1": 2
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "1": 3
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          0,
+          -1,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 3
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "1": 1
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          0,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 2
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          -1,
+          0,
+          1,
+          0,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 2
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          0,
+          -1,
+          1,
+          -1,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 1
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          0,
+          -1,
+          1,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          0,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 1
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          -1,
+          -1,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 2
+        },
+        "test": {
+          "1": 2
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "1": 4
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 2
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          1,
+          -1,
+          1,
+          1,
+          0
+        ],
+        "train": {
+          "1": 1
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          1,
+          0,
+          -1,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 2
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 3
+        },
+        "test": {
+          "-1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          0
+        ],
+        "train": {
+          "1": 3
+        },
+        "test": {
+          "-1": 3
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          0,
+          -1,
+          -1,
+          -1,
+          1,
+          0,
+          -1,
+          0
+        ],
+        "train": {
+          "1": 1
+        },
+        "test": {
+          "-1": 2
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          0
+        ],
+        "train": {
+          "-1": 2
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 2
+        },
+        "test": {
+          "1": 1
+        },
+        "conflicting_labels": true
+      },
+      {
+        "features": [
+          1,
+          0,
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          1,
+          0
+        ],
+        "train": {
+          "-1": 1
+        },
+        "test": {
+          "0": 5
+        },
+        "conflicting_labels": true
+      }
+    ]
+  },
+  "evaluation_strategy": "exact_record_group_aware",
+  "random_seed": 42,
+  "test_size_target": 0.2,
+  "duplicate_leakage_prevented": true,
+  "shared_exact_records": 0,
   "seed": 42,
   "n_train": 1082,
-  "n_rules": 8102
+  "n_rules": 8441
 }
