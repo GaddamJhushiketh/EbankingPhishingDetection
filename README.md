@@ -63,6 +63,27 @@ pytest
 
 ## Scope boundary
 
-This phase does not claim any phishing-detection capability or ML results.
-Model design, dataset selection, feature engineering, associative-rule
-training, evaluation, and prediction workflows belong to later phases.
+Phase 1 does not claim any phishing-detection capability or ML results.
+Dataset analysis and reusable feature/item preprocessing are now available,
+but associative-rule training, evaluation, and prediction workflows belong to
+later phases.
+
+## Phase 3 preprocessing contract
+
+The reusable preprocessing module is `app/ml/preprocessing.py`. It validates
+the nine observed feature columns and the `Result` target using the UCI domain
+`{-1, 0, 1}`. The target remains three-class and is represented as:
+
+```text
+-1 -> Result=Phishy
+ 0 -> Result=Suspicious
+ 1 -> Result=Legitimate
+```
+
+Feature items preserve both the feature name and value, for example
+`SFH=1`, `SSLfinal_State=-1`, and `web_traffic=0`. The duplicate-preserving
+validated input is `dataset/processed/phishing_clean.csv`; the encoded
+association-mining artifact is
+`dataset/processed/associative_mining_dataset.csv`. The earlier
+`phishing_dataset_deduplicated.csv` remains a separate sensitivity-analysis
+artifact.
