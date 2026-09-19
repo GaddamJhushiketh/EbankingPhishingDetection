@@ -70,19 +70,22 @@ def predict():
     try:
         observations = service.analyze_url(url)
         safe_url = redact_url(url)
+        safe_observations = dict(observations)
+        if "url" in safe_observations:
+            safe_observations["url"] = safe_url
         db.session.add(PredictionHistory(
-            url=safe_url, prediction=None, label=None, features=observations,
+            url=safe_url, prediction=None, label=None, features=safe_observations,
             prediction_status="feature_mapping_unavailable",
         ))
         db.session.commit()
         return render_template(
             "result.html", url=safe_url, unavailable=True,
-            observations=observations,
+            observations=safe_observations,
             error="Website analysis completed, but a model prediction was not produced because the original Dataset 379 feature-encoding rules could not be verified for all required features.",
         ), 200
     except (URLValidationError, FeatureExtractionError, ValueError) as exc:
         db.session.rollback()
-        return render_template("result.html", error=str(exc), url=url), 400
+        return render_template("result.html", error=str(exc), url=redact_url(url)), 400
     except Exception:
         db.session.rollback()
         current_app.logger.exception("Prediction request failed")

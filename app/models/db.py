@@ -1,7 +1,23 @@
 """Database extension and prediction history model."""
+from sqlalchemy import inspect, text
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
+
+
+def ensure_history_schema() -> None:
+    """Apply only additive compatibility changes to an existing history table."""
+
+    columns = {column["name"] for column in inspect(db.engine).get_columns("prediction_history")}
+    if "prediction_status" not in columns:
+        db.session.execute(
+            text(
+                "ALTER TABLE prediction_history "
+                "ADD COLUMN prediction_status VARCHAR(40) "
+                "NOT NULL DEFAULT 'predicted'"
+            )
+        )
+        db.session.commit()
 
 
 class PredictionHistory(db.Model):

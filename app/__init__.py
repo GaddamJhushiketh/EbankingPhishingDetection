@@ -21,10 +21,11 @@ def create_app(config_name=None):
 
     Path(application.instance_path).mkdir(parents=True, exist_ok=True)
 
-    from app.models.db import db
+    from app.models.db import db, ensure_history_schema
     db.init_app(application)
     with application.app_context():
         db.create_all()
+        ensure_history_schema()
 
     from app.services.prediction import PredictionService
     from app.utils.model_integrity import ModelIntegrityError

@@ -256,3 +256,43 @@ rule evidence, not prediction probability. Feature analytics retain the
 technical encoded values and do not invent unresolved Dataset 379 semantic
 descriptions. Live URL analyses that remain `mapping_unverified` are not
 counted as completed predictions.
+
+## Final Deployment Readiness
+
+Development setup:
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env
+python app.py
+```
+
+The development application uses SQLite by default, permits `MODEL_SHA256` to
+be unset with an explicit unverified-loading warning, and generates a
+random process-local secret when `SECRET_KEY` is omitted. Configure
+`DATABASE_URL` for SQLite or the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`,
+and `DB_PASSWORD` variables for MySQL.
+
+Production requires both a strong environment-provided `SECRET_KEY` and the
+exact SHA-256 `MODEL_SHA256` for the trusted
+`models/associative_classifier.pkl` artifact. Generate a secret with
+`python -c "import secrets; print(secrets.token_urlsafe(32))"` and never
+commit it. Run the application with a production WSGI server rather than
+Flask's development server.
+
+Run the complete deterministic test suite with `pytest -q tests`. The
+reproducibility checks and metadata are maintained by
+`scripts/validate_dataset.py`, `models/dataset_quality.json`,
+`models/reproducibility_metadata.json`, and `models/model_manifest.json`.
+The read-only security analytics dashboard is available at `/dashboard`.
+
+The trusted prediction workflow is `/predict/features`, which accepts a
+complete already encoded Dataset 379 vector. Live URL analysis remains
+mapping-unavailable when authoritative feature-generation rules cannot be
+verified; it must not be described as a fully trained end-to-end live
+website predictor. URL fetching remains restricted to public HTTP(S)
+destinations with bounded, revalidated requests. Pickle is a trusted
+application artifact format; integrity checking does not make untrusted
+pickle safe.
