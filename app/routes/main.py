@@ -1,10 +1,16 @@
 """Main application routes."""
 
 from flask import Blueprint, current_app, jsonify, render_template, request
+from sqlalchemy import text
 from app.models.db import PredictionHistory, db
 from app.services.feature_extraction import FeatureExtractionError
 from app.services.url_security import URLValidationError, redact_url
-from app.ml.preprocessing import FEATURE_COLUMNS, TARGET_LABELS, validate_feature_vector
+from app.ml.preprocessing import (
+    FEATURE_ALLOWED_VALUES,
+    FEATURE_COLUMNS,
+    TARGET_LABELS,
+    validate_feature_vector,
+)
 
 
 main_blueprint = Blueprint("main", __name__)
@@ -23,6 +29,24 @@ def health():
 
     ready = current_app.extensions.get("prediction_service") is not None
     return jsonify({"status": "ok" if ready else "degraded", "service": "ebanking-phishing-detection"}), (200 if ready else 503)
+
+
+@main_blueprint.get("/status")
+def system_status():
+    model_loaded = current_app.extensions.get("prediction_service") is not None
+    model_integrity = "Verified" if current_app.config.get("MODEL_SHA256") else "Not configured"
+    database = "Available"
+    try:
+        db.session.execute(text("SELECT 1"))
+    except Exception:
+        database = "Unavailable"
+    return render_template(
+        "status.html",
+        model_loaded=model_loaded,
+        model_integrity=model_integrity,
+        database=database,
+        feature_extraction="Available observations / mapping restricted",
+    )
 
 
 @main_blueprint.route("/predict", methods=["GET", "POST"])
@@ -59,7 +83,11 @@ def predict():
 @main_blueprint.route("/predict/features", methods=["GET", "POST"])
 def predict_features():
     if request.method == "GET":
-        return render_template("feature_vector.html", feature_columns=FEATURE_COLUMNS)
+        return render_template(
+            "feature_vector.html",
+            feature_columns=FEATURE_COLUMNS,
+            feature_values=FEATURE_ALLOWED_VALUES,
+        )
     payload = request.get_json(silent=True) or request.form
     try:
         raw_features = {column: payload.get(column) for column in FEATURE_COLUMNS}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">Operational overview</p><h1>System status</h1><p class="lede">Current application readiness and safety boundaries.</p></div>
+<section class="status-list">
+    <div><span>Application</span><strong class="status-good">Operational</strong></div>
+    <div><span>Model</span><strong>{{ "Loaded" if model_loaded else "Unavailable" }}</strong></div>
+    <div><span>Model integrity</span><strong>{{ model_integrity }}</strong></div>
+    <div><span>Database</span><strong>{{ database }}</strong></div>
+    <div><span>Feature extraction</span><strong>{{ feature_extraction }}</strong></div>
+</section>
+<div class="notice"><strong>Safety boundary</strong><p>Public URL analysis can collect raw observations, but Dataset 379 mapping uncertainty prevents live model prediction until verified encoding rules are recovered.</p></div>
+{% endblock %}

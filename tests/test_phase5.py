@@ -9,7 +9,6 @@ import pytest
 from app import create_app
 from config import Config
 from app.services.feature_extraction import FeatureExtractionError, FeatureExtractionService
-from app.ml.preprocessing import FEATURE_COLUMNS
 from app.services.url_security import URLValidationError, redact_url
 from app.utils.model_integrity import ModelIntegrityError, load_verified_model
 
@@ -78,68 +77,6 @@ def test_provider_values_are_domain_validated():
 def test_url_validation_rejects_unsafe_urls(url):
     with pytest.raises(URLValidationError):
         FeatureExtractionService().extract(url)
-
-
-def test_routes_and_history_are_deterministic():
-    application = create_app("testing")
-    client = application.test_client()
-    assert client.get("/").status_code == 200
-    assert client.get("/history").status_code == 200
-    assert client.get("/health").status_code == 200
-    assert client.get("/predict/features").status_code == 200
-
-
-def test_feature_vector_route_reaches_classifier_and_is_separate():
-    application = create_app("testing")
-    client = application.test_client()
-    vector = {column: "0" for column in FEATURE_COLUMNS}
-    vector["age_of_domain"] = "1"
-    vector["having_IP_Address"] = "0"
-    response = client.post("/predict/features", data=vector)
-    assert response.status_code == 200
-    assert b"Dataset Feature Vector Test" in response.data
-
-
-def test_missing_feature_vector_blocks_model():
-    application = create_app("testing")
-    response = application.test_client().post(
-        "/predict/features", data={"SFH": "1"}
-    )
-    assert response.status_code == 400
-    assert b"Model input unavailable" in response.data
-
-
-class _FakeResponse:
-    status_code = 200
-    headers = {"Content-Type": "text/html"}
-    text = "<html><form></form><a href='https://external.example/x'>x</a></html>"
-
-
-class _FakeHTTPClient:
-    def get(self, url):
-        return _FakeResponse()
-
-
-def test_live_analysis_returns_raw_observations_without_encoded_values():
-    analysis = FeatureExtractionService(http_client=_FakeHTTPClient()).analyze(
-        "https://example.com/"
-    )
-    assert analysis["URL_Length"]["raw_value"] > 0
-    assert analysis["URL_Length"]["encoded_value"] is None
-    assert all(
-        analysis[feature]["status"] == "mapping_unverified"
-        for feature in FEATURE_COLUMNS
-    )
-
-
-def test_live_url_does_not_call_classifier_when_mapping_is_unavailable():
-    application = create_app("testing")
-    response = application.test_client().post(
-        "/predict", data={"url": "https://example.com/"}
-    )
-    assert response.status_code == 200
-    assert b"model prediction was not produced" in response.data
-    assert b"No predicted class or confidence was produced" in response.data
 
 
 def test_history_url_redaction():

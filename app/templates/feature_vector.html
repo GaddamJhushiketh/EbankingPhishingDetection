@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Dataset Feature Vector Test</h1>
-<p>This development/test path accepts an already encoded UCI Dataset 379 vector. It does not extract these values from a URL.</p>
+<p class="lede">Use this page to test the trained Associative Classification model with an already encoded Dataset 379 feature vector.</p>
+<div class="notice"><strong>Important:</strong> These values are supplied directly as Dataset 379 feature values. They are not extracted from a submitted website.</div>
 <form method="post" action="{{ url_for('main.predict_features') }}">
     {% for feature in feature_columns %}
     <label for="{{ feature }}">{{ feature }}</label>
-    <input id="{{ feature }}" name="{{ feature }}" type="number" step="1" required>
+    <select id="{{ feature }}" name="{{ feature }}" required>
+        <option value="" selected disabled>Select a value</option>
+        {% for value in feature_values[feature] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+    </select>
     {% endfor %}
-    <button type="submit">Predict Feature Vector</button>
+    <button class="button" type="submit">Run model prediction</button>
 </form>
-<a href="{{ url_for('main.index') }}">Back</a>
 {% endblock %}

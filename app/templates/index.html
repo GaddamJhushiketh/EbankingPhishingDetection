@@ -1,18 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="hero">
-    <p class="eyebrow">Final-year engineering project</p>
-    <h1>E-Banking Phishing Detection</h1>
-    <p>
-        A modular Flask foundation for detecting phishing websites using
-        associative classification.
-    </p>
-    <form method="post" action="{{ url_for('main.predict') }}">
-        <label for="url">Website URL</label>
-        <input id="url" name="url" type="url" placeholder="https://example.com" required maxlength="2048">
-        <button type="submit">Analyze URL</button>
-    </form>
-    <p><a href="{{ url_for('main.predict_features') }}">Dataset Feature Vector Test</a></p>
+<section class="hero hero-grid">
+    <div>
+        <p class="eyebrow">Final-year engineering project · Phase 6</p>
+        <h1>Detecting E-Banking Phishing Websites Using Associative Classification</h1>
+        <p class="lede">Analyze public website signals and test the trained three-class model with verified Dataset 379 feature vectors.</p>
+        <div class="hero-actions">
+            <a class="button" href="{{ url_for('main.predict') }}">Start live analysis</a>
+            <a class="button button-secondary" href="{{ url_for('main.predict_features') }}">Test a feature vector</a>
+        </div>
+    </div>
+    <div class="hero-note">
+        <span class="status-dot"></span>
+        <div><strong>Reproducibility first</strong><p>Live observations are kept separate from encoded model features. Unverified mappings never become predictions.</p></div>
+    </div>
 </section>
+<section class="section-heading"><p class="eyebrow">Workspace</p><h2>Choose an analysis path</h2></section>
+<section class="card-grid">
+    <a class="feature-card" href="{{ url_for('main.predict') }}"><span class="card-icon">↗</span><h3>Live Website Analysis</h3><p>Collect safe raw observations from a public URL. Prediction remains gated when mappings are unavailable.</p><span class="card-link">Analyze a URL →</span></a>
+    <a class="feature-card" href="{{ url_for('main.predict_features') }}"><span class="card-icon">▦</span><h3>Dataset Feature Vector Test</h3><p>Submit a complete, already encoded Dataset 379 vector to validate model integration.</p><span class="card-link">Open test form →</span></a>
+    <a class="feature-card" href="{{ url_for('main.history') }}"><span class="card-icon">◷</span><h3>Prediction History</h3><p>Review predictions and analyses that were correctly marked as mapping-unavailable.</p><span class="card-link">View history →</span></a>
+    <a class="feature-card" href="{{ url_for('main.system_status') }}"><span class="card-icon">✓</span><h3>System Status</h3><p>Inspect application, model, database, and feature-extraction readiness.</p><span class="card-link">Check status →</span></a>
+</section>
+<section class="info-banner"><strong>Phase 4 Dataset Evaluation</strong><span>Offline group-aware evaluation: 78.23% accuracy and 64.21% macro F1. This is not a live-world accuracy claim.</span></section>
 {% endblock %}

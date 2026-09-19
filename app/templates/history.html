@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Prediction history</h1>
-<ul>{% for item in history %}
-    <li>{{ item.url }} — {{ item.prediction_status }}{% if item.label %}: {{ item.label }}{% endif %} ({{ item.created_at }})</li>
-{% else %}<li>No analysis history yet.</li>{% endfor %}</ul>
+<div class="page-heading"><p class="eyebrow">Audit trail</p><h1>Analysis history</h1><p class="lede">Stored results use redacted URLs and distinguish predictions from analyses blocked by unresolved mappings.</p></div>
+{% if history %}<div class="table-wrap"><table><thead><tr><th>ID</th><th>URL</th><th>Status</th><th>Prediction</th><th>Created at</th></tr></thead><tbody>{% for item in history %}<tr><td>{{ item.id }}</td><td class="url-cell">{{ item.url }}</td><td><span class="badge {{ 'badge-success' if item.prediction_status == 'predicted' else 'badge-warning' }}">{{ 'Predicted' if item.prediction_status == 'predicted' else 'Feature Mapping Unavailable' }}</span></td><td>{{ item.label or 'Not available' }}</td><td>{{ item.created_at }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><h2>No analyses yet</h2><p>Completed predictions and live analyses will appear here.</p></div>{% endif %}
 {% endblock %}

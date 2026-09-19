@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Analysis result</h1>
-{% if feature_vector_test %}<p><strong>Dataset Feature Vector Test</strong></p>{% endif %}
+<div class="page-heading"><p class="eyebrow">{% if feature_vector_test %}Dataset Feature Vector Test{% else %}Live Website Analysis{% endif %}</p><h1>Analysis result</h1></div>
 {% if unavailable %}
-<p role="alert">{{ error }}</p>
-<p>No predicted class or confidence was produced.</p>
-<h2>Raw observations</h2>
-<ul>{% for name, value in observations.items() %}<li>{{ name }}: {{ value }}</li>{% endfor %}</ul>
+<div class="alert alert-warning" role="status"><strong>Analysis completed — model prediction unavailable</strong><p>{{ error }}</p><p>No predicted class or confidence was produced.</p></div>
+<h2>Raw observations</h2><div class="observation-grid">
+{% for name, value in observations.items() %}<div class="observation"><span class="eyebrow">RAW OBSERVATION</span><strong>{{ name }}</strong><code>{{ value }}</code></div>{% endfor %}
+</div>
 {% elif error %}<p role="alert">{{ error }}</p>{% else %}
-<p><strong>{{ url }}</strong>: {{ label }} ({{ prediction }})</p>
-<ul>{% for name, value in features.items() %}<li>{{ name }}: {{ value }}</li>{% endfor %}</ul>
+<div class="result-card"><span class="eyebrow">PREDICTION STATUS</span><h2>{{ label }}</h2><p class="result-meta">{{ url }}</p><div class="feature-list">{% for name, value in features.items() %}<div><span>{{ name }}</span><strong>{{ value }}</strong></div>{% endfor %}</div></div>
+<div class="notice"><strong>How this result was produced</strong><p>The existing Associative Classification model was applied to the supplied Dataset 379-compatible feature vector. No confidence score is shown because the model does not provide calibrated probabilities.</p></div>
 {% endif %}
-<a href="{{ url_for('main.index') }}">Analyze another URL</a>
+<a class="text-link" href="{{ url_for('main.index') }}">Return to dashboard →</a>
 {% endblock %}
