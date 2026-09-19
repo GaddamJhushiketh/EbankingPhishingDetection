@@ -69,6 +69,24 @@ def predict():
         return render_template("result.html", error="Prediction model is unavailable."), 503
     try:
         observations = service.analyze_url(url)
+        encoding = service.encode_live_observations(observations)
+        if encoding["complete"]:
+            encoded = {
+                name: item["encoded_value"]
+                for name, item in encoding["features"].items()
+            }
+            prediction, features, explanation = service.explain_features(encoded)
+            label = TARGET_LABELS[prediction]
+            db.session.add(PredictionHistory(
+                url=redact_url(url), prediction=prediction, label=label,
+                features=features, prediction_status="predicted",
+            ))
+            db.session.commit()
+            return render_template(
+                "result.html", url=redact_url(url), prediction=prediction,
+                label=label, features=features, explanation=explanation,
+                live_analysis=True, encoded_features=encoding["features"],
+            ), 200
         safe_url = redact_url(url)
         safe_observations = dict(observations)
         if "url" in safe_observations:
@@ -81,7 +99,8 @@ def predict():
         return render_template(
             "result.html", url=safe_url, unavailable=True,
             observations=safe_observations,
-            error="Website analysis completed, but a model prediction was not produced because the original Dataset 379 feature-encoding rules could not be verified for all required features.",
+            encoding=encoding,
+            error="Live classification unavailable because one or more Dataset 379 feature mappings could not be verified; a model prediction was not produced.",
         ), 200
     except (URLValidationError, FeatureExtractionError, ValueError) as exc:
         db.session.rollback()
