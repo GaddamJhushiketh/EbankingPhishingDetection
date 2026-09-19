@@ -1,1 +1,1 @@
-"""Machine-learning components will be added in a later phase."""
+"""Reusable data preparation components for the ML pipeline."""
