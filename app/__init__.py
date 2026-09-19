@@ -38,6 +38,12 @@ def create_app(config_name=None):
         application.extensions["prediction_service"] = None
 
     from app.routes.main import main_blueprint
+    from app.services.analytics import AnalyticsService
+    application.extensions["analytics_service"] = AnalyticsService(
+        model=application.extensions.get("prediction_service"),
+        root=Path(application.root_path).parent,
+        integrity_configured=bool(application.config.get("MODEL_SHA256")),
+    )
 
     application.register_blueprint(main_blueprint)
 

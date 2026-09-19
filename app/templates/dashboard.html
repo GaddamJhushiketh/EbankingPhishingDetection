@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-heading">
+    <p class="eyebrow">Security analytics</p>
+    <h1>Security Analysis Dashboard</h1>
+    <p class="lede">Application history, validated Dataset 379 metadata, and read-only model evidence.</p>
+</div>
+
+<section class="dashboard-section">
+    <div class="section-heading"><p class="eyebrow">Overview</p><h2>Analysis activity</h2></div>
+    <div class="metric-grid">
+        <div class="metric-card"><span>Total analyses</span><strong>{{ overview.total }}</strong></div>
+        <div class="metric-card metric-danger"><span>Phishy detections</span><strong>{{ overview.phishy }}</strong></div>
+        <div class="metric-card metric-warning"><span>Suspicious detections</span><strong>{{ overview.suspicious }}</strong></div>
+        <div class="metric-card metric-good"><span>Legitimate detections</span><strong>{{ overview.legitimate }}</strong></div>
+        <div class="metric-card"><span>Mapping-unverified</span><strong>{{ overview.mapping_unverified }}</strong></div>
+    </div>
+</section>
+
+<section class="dashboard-section dashboard-two-column">
+    <div class="dashboard-card">
+        <p class="eyebrow">Classification distribution</p><h2>Completed predictions</h2>
+        {% if overview.phishy or overview.suspicious or overview.legitimate %}
+        <div class="distribution-list">
+            {% for label, count in class_counts.items() %}<div><span>{{ label }}</span><strong>{{ count }}</strong></div>{% endfor %}
+        </div>
+        {% else %}<p class="empty-copy">No prediction history available yet.</p>{% endif %}
+    </div>
+    <div class="dashboard-card">
+        <p class="eyebrow">Rule evidence analytics</p><h2>Learned-rule usage</h2>
+        {% if rule_evidence.prediction_count %}<div class="distribution-list"><div><span>Predictions with matching rules</span><strong>{{ rule_evidence.predictions_with_rules }}</strong></div><div><span>Predictions without matching rules</span><strong>{{ rule_evidence.predictions_without_rules }}</strong></div><div><span>Average matching rules</span><strong>{{ "%.2f"|format(rule_evidence.average_matching_rules) }}</strong></div></div>{% else %}<p class="empty-copy">No completed feature-vector predictions are available for rule evidence analysis.</p>{% endif %}
+        <p class="small-note">Rule confidence is evidence metadata, not prediction probability.</p>
+    </div>
+</section>
+
+<section class="dashboard-section dashboard-card">
+    <div class="section-row"><div><p class="eyebrow">Recent activity</p><h2>Latest analyses</h2></div><a class="text-link" href="{{ url_for('main.history') }}">Open full history →</a></div>
+    <form class="filter-form" method="get" action="{{ url_for('main.dashboard') }}" aria-label="Filter dashboard history">
+        <label for="classification">Classification</label><select id="classification" name="classification"><option value="">All classifications</option>{% for value in ('Phishy', 'Suspicious', 'Legitimate') %}<option value="{{ value }}" {% if filters.classification == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select>
+        <label for="status">Status</label><select id="status" name="status"><option value="">All statuses</option><option value="predicted" {% if filters.status == 'predicted' %}selected{% endif %}>Predicted</option><option value="feature_mapping_unavailable" {% if filters.status == 'feature_mapping_unavailable' %}selected{% endif %}>Mapping unavailable</option></select>
+        <label for="date_from">From</label><input id="date_from" name="date_from" type="date" value="{{ request.args.get('date_from', '') }}">
+        <label for="date_to">To</label><input id="date_to" name="date_to" type="date" value="{{ request.args.get('date_to', '') }}">
+        <button class="button" type="submit">Apply filters</button>
+    </form>
+    {% if filter_error %}<p class="alert alert-warning" role="alert">{{ filter_error }}</p>{% endif %}
+    {% if recent_activity %}<div class="table-wrap"><table><caption class="sr-only">Recent security analyses</caption><thead><tr><th>Timestamp</th><th>Source</th><th>Status</th><th>Classification</th><th>Rule evidence</th></tr></thead><tbody>{% for item in recent_activity %}<tr><td>{{ item.created_at }}</td><td class="url-cell">{{ item.url }}</td><td>{{ 'Predicted' if item.status == 'predicted' else 'Mapping unavailable' }}</td><td>{{ item.label or 'Not available' }}</td><td>{{ item.rule_count if item.rule_count is not none else 'Not available' }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty-copy">No prediction history available yet.</p>{% endif %}
+</section>
+
+<section class="dashboard-section dashboard-two-column">
+    <div class="dashboard-card"><p class="eyebrow">Offline Dataset 379 Evaluation</p><h2>Validated model performance</h2>{% if evaluation.accuracy is not none %}<div class="metric-list"><div><span>Accuracy</span><strong>{{ "%.4f"|format(evaluation.accuracy) }}</strong></div><div><span>Macro Precision</span><strong>{{ "%.4f"|format(evaluation.macro_precision) }}</strong></div><div><span>Macro Recall</span><strong>{{ "%.4f"|format(evaluation.macro_recall) }}</strong></div><div><span>Macro F1</span><strong>{{ "%.4f"|format(evaluation.macro_f1) }}</strong></div><div><span>Weighted F1</span><strong>{{ "%.4f"|format(evaluation.weighted_f1) }}</strong></div></div>{% else %}<p class="empty-copy">Offline evaluation metadata unavailable.</p>{% endif %}<p class="small-note">These are fixed offline Dataset 379 results, not live detection accuracy or a probability of correctness.</p></div>
+    <div class="dashboard-card"><p class="eyebrow">Dataset Quality</p><h2>Source summary</h2>{% if dataset_quality.rows is not none %}<div class="metric-list"><div><span>Rows</span><strong>{{ dataset_quality.rows }}</strong></div><div><span>Features</span><strong>{{ dataset_quality.features|length }}</strong></div><div><span>Duplicate rows</span><strong>{{ dataset_quality.duplicate_rows }}</strong></div><div><span>Unique rows</span><strong>{{ dataset_quality.unique_rows }}</strong></div><div><span>Conflicting feature groups</span><strong>{{ dataset_quality.conflicting_feature_groups }}</strong></div><div><span>Missing values</span><strong>{{ dataset_quality.missing_values }}</strong></div></div>{% else %}<p class="empty-copy">Dataset quality metadata unavailable.</p>{% endif %}</div>
+</section>
+
+<section class="dashboard-section dashboard-card">
+    <p class="eyebrow">Feature distribution</p><h2>Stored encoded feature values</h2>
+    {% if feature_distribution %}<div class="feature-distribution-grid">{% for name, data in feature_distribution.items() %}<div class="feature-distribution"><h3><code>{{ name }}</code></h3><p>{{ data.observations }} observations</p>{% for item in data["values"] %}<div class="distribution-row"><span>Value {{ item.value }}</span><strong>{{ item.count }}</strong></div>{% endfor %}</div>{% endfor %}</div>{% else %}<p class="empty-copy">Not enough stored feature-vector data.</p>{% endif %}
+</section>
+
+<section class="dashboard-section dashboard-two-column">
+    <div class="dashboard-card"><p class="eyebrow">System and model status</p><h2>{{ model_status.name }}</h2><div class="metric-list"><div><span>Artifact status</span><strong>{{ 'Loaded' if model_status.loaded else 'Unavailable' }}</strong></div><div><span>Integrity status</span><strong>{{ model_status.integrity }}</strong></div><div><span>Dataset identity</span><strong>{{ model_status.dataset_identity }}</strong></div><div><span>Metadata schema</span><strong>{{ model_status.schema or 'Unavailable' }}</strong></div></div></div>
+    <div class="dashboard-card"><p class="eyebrow">Methodology and limitations</p><h2>Interpretation boundaries</h2><p>Predictions use already encoded Dataset 379 feature vectors. Live URL analysis may remain mapping-unverified and is not counted as a prediction.</p><p>Association-rule evidence is model-derived evidence, not causal interpretation. The dashboard reflects application history, not an external live phishing database.</p><p class="small-note">Generated from application data and validated offline model metadata.</p></div>
+</section>
+{% endblock %}

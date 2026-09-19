@@ -233,3 +233,26 @@ causality, and they do not add semantic interpretations that have not been
 verified for Dataset 379. Live URL analysis remains `mapping_unverified` when
 the complete authoritative encoding cannot be established; it does not run
 the classifier or produce rule explanations in that state.
+
+## Security Analytics Dashboard
+
+`/dashboard` is a read-only reporting view over persisted prediction history
+and validated offline metadata. It reports total analyses, class counts,
+mapping-unverified analyses, recent activity, learned-rule evidence usage,
+encoded feature-value distributions, Dataset 379 evaluation metrics, dataset
+quality, and safe model status information.
+
+Dashboard filters for classification, prediction status, and date range are
+validated server-side and applied through SQLAlchemy ORM predicates. No
+arbitrary SQL or query expressions are accepted. Empty history and missing
+optional metadata produce explicit empty states rather than fabricated zeros
+or placeholder charts. The page includes print-friendly styling and states
+that it is generated from application data and validated offline model
+metadata.
+
+Offline evaluation metrics describe the fixed Dataset 379 evaluation and are
+not live website accuracy or a probability of correctness. Rule confidence is
+rule evidence, not prediction probability. Feature analytics retain the
+technical encoded values and do not invent unresolved Dataset 379 semantic
+descriptions. Live URL analyses that remain `mapping_unverified` are not
+counted as completed predictions.
