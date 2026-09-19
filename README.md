@@ -210,3 +210,26 @@ The offline `/predict/features` path classifies complete, already encoded
 Dataset 379 vectors. Live URL analysis is a separate workflow: it may collect
 raw observations, but it does not claim complete Dataset 379 encoding where
 authoritative feature mappings remain unavailable.
+
+## Model Explainability
+
+The feature-vector result page includes model-derived evidence from the
+association rules stored in the verified classifier artifact. Matching rules
+retain their learned support, rule confidence, lift, consequent, and
+antecedent conditions. Rules are ranked using the classifier's existing
+deterministic order: descending confidence, lift, support, antecedent length,
+class value, and lexical antecedent order. No new score is introduced.
+
+Rule confidence describes how often the rule consequent occurred in the
+training data for that antecedent; it is not a prediction probability and is
+not presented as one. Support describes the rule's observed transaction
+frequency, while lift compares the rule's consequent frequency with its
+baseline frequency. The feature analysis table reports technical Dataset 379
+feature names, submitted encoded values, allowed values, and matching-rule
+counts. It does not assign causal or positive/negative feature importance.
+
+Explanations are limited to learned rule evidence. They do not establish
+causality, and they do not add semantic interpretations that have not been
+verified for Dataset 379. Live URL analysis remains `mapping_unverified` when
+the complete authoritative encoding cannot be established; it does not run
+the classifier or produce rule explanations in that state.

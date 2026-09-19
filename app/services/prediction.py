@@ -5,6 +5,7 @@ from pathlib import Path
 from app.ml.associative_classifier import AssociativeClassifier
 from app.utils.model_integrity import load_verified_model
 from .feature_extraction import FeatureExtractionService
+from .explanation import ExplanationService
 
 log = logging.getLogger(__name__)
 
@@ -17,6 +18,7 @@ class PredictionService:
             self.model_path, AssociativeClassifier.load,
             expected_hash=expected_hash, production=production,
         )
+        self.explanations = ExplanationService(self.model)
 
     def analyze_url(self, url: str) -> dict[str, object]:
         return self.extractor.analyze(url)
@@ -25,3 +27,7 @@ class PredictionService:
         from app.ml.preprocessing import validate_feature_vector
         validated = validate_feature_vector(features)
         return self.model.predict_one(validated), validated
+
+    def explain_features(self, features: dict[str, int]) -> tuple[int, dict[str, int], dict]:
+        prediction, validated = self.predict_features(features)
+        return prediction, validated, self.explanations.explain(validated)
