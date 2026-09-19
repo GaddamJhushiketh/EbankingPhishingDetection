@@ -7,14 +7,28 @@ from app.utils.model_integrity import load_verified_model
 from .feature_extraction import FeatureExtractionService
 from .explanation import ExplanationService
 from .dataset379_encoder import Dataset379Encoder
+from .domain_information import DomainInformationService
+from .traffic_provider import TrafficProvider
 
 log = logging.getLogger(__name__)
 
 
 class PredictionService:
-    def __init__(self, model_path: Path, *, expected_hash=None, production=False, extractor=None):
+    def __init__(
+        self,
+        model_path: Path,
+        *,
+        expected_hash=None,
+        production=False,
+        extractor=None,
+        domain_information=None,
+        traffic_provider=None,
+    ):
         self.model_path = Path(model_path).resolve()
-        self.extractor = extractor or FeatureExtractionService()
+        self.extractor = extractor or FeatureExtractionService(
+            domain_information=domain_information,
+            traffic_provider=traffic_provider,
+        )
         self.encoder = Dataset379Encoder()
         self.model = load_verified_model(
             self.model_path, AssociativeClassifier.load,

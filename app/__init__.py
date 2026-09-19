@@ -28,12 +28,20 @@ def create_app(config_name=None):
         ensure_history_schema()
 
     from app.services.prediction import PredictionService
+    from app.services.domain_information import DomainInformationService
+    from app.services.traffic_provider import TrafficProvider
     from app.utils.model_integrity import ModelIntegrityError
     try:
         application.extensions["prediction_service"] = PredictionService(
             application.config["MODEL_FILE"],
             expected_hash=application.config.get("MODEL_SHA256"),
             production=selected_config == "production",
+            domain_information=(
+                DomainInformationService(timeout=application.config["DOMAIN_INFO_TIMEOUT"])
+                if application.config.get("DOMAIN_INFO_PROVIDER") == "whois"
+                else DomainInformationService(client=None)
+            ),
+            traffic_provider=TrafficProvider(),
         )
     except ModelIntegrityError:
         application.extensions["prediction_service"] = None

@@ -75,6 +75,29 @@ def test_domain_age_and_ip_mappings():
     assert encode(hostname_is_ip=False)["features"]["having_IP_Address"]["encoded_value"] == 1
 
 
+def test_provider_unavailable_statuses_remain_unresolved():
+    result = encode(
+        domain_age_months=None,
+        domain_age_status="provider_unavailable",
+        web_traffic={"status": "provider_unavailable"},
+    )
+    assert result["features"]["age_of_domain"]["mapping_status"] == "provider_unavailable"
+    assert result["features"]["web_traffic"]["mapping_status"] == "provider_unavailable"
+
+
+def test_ssl_observations_do_not_become_https_predictions():
+    result = encode(
+        ssl_state={
+            "scheme": "https",
+            "tls_verified": True,
+            "certificate_valid": True,
+            "hostname_match": True,
+        }
+    )
+    assert result["features"]["SSLfinal_State"]["encoded_value"] is None
+    assert result["features"]["SSLfinal_State"]["mapping_status"] == "mapping_unverified"
+
+
 def test_ssl_and_traffic_remain_unresolved():
     result = encode()
     assert result["features"]["SSLfinal_State"]["mapping_status"] == "mapping_unverified"

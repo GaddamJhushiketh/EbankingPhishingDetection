@@ -186,6 +186,29 @@ The complete nine-feature vector can therefore be produced only when a
 trusted source supplies the remaining provider-dependent observations. The
 offline evaluation metrics below are not live-web accuracy.
 
+### Current live provider status
+
+- `age_of_domain`: the optional WHOIS integration extracts the registrable
+  domain, handles datetime/list/malformed creation dates deterministically,
+  and uses the earliest valid creation date. Provider failure or missing
+  creation data remains unresolved; it is never treated as a new domain.
+- `SSLfinal_State`: the safe HTTP path records scheme and whether verified TLS
+  retrieval succeeded, but certificate observations are not converted to a
+  Dataset 379 value because the historical categorical mapping is not
+  sufficiently established.
+- `web_traffic`: an explicit provider boundary exists, but no Alexa, Tranco,
+  Similarweb, Cloudflare, Google, or other modern ranking is substituted for
+  the historical Dataset 379 provider and cutoff. It remains unresolved.
+
+WHOIS lookup timeout and provider selection are controlled by
+`DOMAIN_INFO_TIMEOUT` and `DOMAIN_INFO_PROVIDER`; traffic provider selection
+is represented by `TRAFFIC_PROVIDER`. These settings are optional and no
+credentials are hard-coded. Feature statuses distinguish available
+observations, verified mappings, provider unavailability, and extraction
+errors. The classifier gate requires nine valid encoded values and nine
+verified mappings, so an ordinary URL still normally produces an explicit
+mapping-unavailable result rather than a fabricated prediction.
+
 ## Tests
 
 ```bash
