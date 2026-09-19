@@ -20,6 +20,7 @@ htmlcov/
 .ruff_cache/
 
 models/*.joblib
+!models/phase4_1_associative_classifier.joblib
 # Phase 4 model artifacts and reports are reproducible deliverables.
 
 data/raw/*

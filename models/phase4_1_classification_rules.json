@@ -1,0 +1,2221 @@
+{
+  "strategy": "Phase 4.1 Strategy D",
+  "ranking": "confidence desc, relative_support desc, lift desc, antecedent_length asc, antecedent lexicographic asc",
+  "rules": [
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.14044350580781415,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.27087576374745415,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.1351636747624076,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.2606924643584521,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.11932418162618796,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.23014256619144602,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.11721224920802534,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.2260692464358452,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.11404435058078141,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.21995926680244396,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.10137275607180571,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1955193482688391,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.1003167898627244,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1934826883910387,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.09926082365364308,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.19144602851323828,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.07708553326293559,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.19010416666666666,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.07497360084477296,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.18489583333333331,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.09292502639915523,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.17922606924643583,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.09292502639915523,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.17922606924643583,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "having_IP_Address=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.08870116156282999,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1710794297352342,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "age_of_domain=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.08658922914466737,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1670061099796334,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.0675818373812038,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.16666666666666666,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.0675818373812038,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.16666666666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.08342133051742344,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.16089613034623215,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.08342133051742344,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.16089613034623215,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.08236536430834214,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.15885947046843177,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011615628299894404,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.1527777777777778,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011615628299894404,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.1527777777777778,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.059134107708553325,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.14583333333333331,
+      "antecedent_length": 2,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.059134107708553325,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.14583333333333331,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.059134107708553325,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.14583333333333331,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.05807814149947202,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.14322916666666666,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.07391763463569166,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1425661914460285,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.07391763463569166,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.1425661914460285,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010559662090813094,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.1388888888888889,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.054910242872228086,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.13541666666666666,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.054910242872228086,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.13541666666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.06969376979936642,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.13441955193482688,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.05279831045406547,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.13020833333333331,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.009503695881731784,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.125,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.050686378035902854,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.125,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.050686378035902854,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.125,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.050686378035902854,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.125,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.06441393875395987,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.12423625254582484,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "age_of_domain=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.06441393875395987,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.12423625254582484,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_Length=0",
+        "URL_of_Anchor=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04963041182682154,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.12239583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04963041182682154,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.12239583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "having_IP_Address=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.06230200633579725,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.12016293279022403,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "URL_Length=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04751847940865892,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.11718749999999999,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04751847940865892,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.11718749999999999,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "URL_Length=0",
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04751847940865892,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.11718749999999999,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "URL_of_Anchor=-1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.06019007391763464,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.11608961303462322,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "age_of_domain=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.046462513199577615,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.11458333333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.046462513199577615,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.11458333333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.057022175290390706,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.10997963340122198,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.0559662090813094,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.10794297352342158,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "age_of_domain=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.0559662090813094,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.10794297352342158,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.042238648363252376,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.10416666666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "having_IP_Address=0",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.05385427666314678,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.10386965376782077,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "popUpWidnow=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.05279831045406547,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.10183299389002036,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04118268215417107,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.1015625,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_Length=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04118268215417107,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.1015625,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.05174234424498416,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.09979633401221995,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09895833333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09895833333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09895833333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.050686378035902854,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.09775967413441955,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_Length=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_Length=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03907074973600845,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09635416666666667,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03907074973600845,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09635416666666667,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03907074973600845,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09635416666666667,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "age_of_domain=-1",
+        "having_IP_Address=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03907074973600845,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09635416666666667,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03801478352692714,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09374999999999999,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "age_of_domain=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03801478352692714,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09374999999999999,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "age_of_domain=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.048574445617740235,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.09368635437881874,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "web_traffic=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.048574445617740235,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.09368635437881874,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.04751847940865892,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.09164969450101833,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "URL_Length=0",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "web_traffic=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "web_traffic=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03695881731784583,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.09114583333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "URL_Length=0",
+        "popUpWidnow=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.046462513199577615,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08961303462321792,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "having_IP_Address=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.046462513199577615,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08961303462321792,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "URL_Length=0",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.046462513199577615,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08961303462321792,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_Length=0",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "URL_Length=0",
+        "URL_of_Anchor=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03590285110876452,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08854166666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.0454065469904963,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.0875763747454175,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "popUpWidnow=0",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.0454065469904963,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.0875763747454175,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "age_of_domain=1",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.0454065469904963,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.0875763747454175,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1",
+        "web_traffic=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03484688489968321,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.0859375,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=-1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.044350580781414996,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.0855397148676171,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.04329461457233368,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.0835030549898167,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.0337909186906019,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08333333333333333,
+      "antecedent_length": 3,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=-1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.0337909186906019,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08333333333333333,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.042238648363252376,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08146639511201628,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.042238648363252376,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08146639511201628,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "SSLfinal_State=1",
+        "age_of_domain=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.042238648363252376,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08146639511201628,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SFH=1",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.042238648363252376,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.08146639511201628,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "age_of_domain=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.03273495248152059,
+      "confidence": 1.0,
+      "lift": 2.466145833333333,
+      "relative_support": 0.08072916666666666,
+      "antecedent_length": 4,
+      "class": 1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07739307535641547,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "having_IP_Address=0",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07739307535641547,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "SSLfinal_State=1",
+        "URL_Length=0",
+        "popUpWidnow=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.04012671594508976,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07739307535641547,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "URL_Length=1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.03801478352692714,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07331975560081466,
+      "antecedent_length": 3,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "Request_URL=1",
+        "URL_of_Anchor=1",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.03801478352692714,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07331975560081466,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=1",
+        "URL_Length=0",
+        "age_of_domain=1",
+        "popUpWidnow=1"
+      ],
+      "consequent": "Result=Phishy",
+      "support": 0.03801478352692714,
+      "confidence": 1.0,
+      "lift": 1.9287169042769856,
+      "relative_support": 0.07331975560081466,
+      "antecedent_length": 4,
+      "class": -1
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 1.0,
+      "lift": 13.152777777777779,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011615628299894404,
+      "confidence": 0.9166666666666666,
+      "lift": 12.056712962962964,
+      "relative_support": 0.1527777777777778,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010559662090813094,
+      "confidence": 0.9090909090909091,
+      "lift": 11.957070707070708,
+      "relative_support": 0.1388888888888889,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.009503695881731784,
+      "confidence": 0.9,
+      "lift": 11.8375,
+      "relative_support": 0.125,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 0.875,
+      "lift": 11.508680555555555,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SSLfinal_State=1",
+        "URL_Length=1",
+        "URL_of_Anchor=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.029567053854276663,
+      "confidence": 0.8484848484848484,
+      "lift": 11.15993265993266,
+      "relative_support": 0.3888888888888889,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.8333333333333333,
+      "lift": 10.960648148148147,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SSLfinal_State=-1",
+        "URL_Length=1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 0.7777777777777778,
+      "lift": 10.229938271604938,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.013727560718057022,
+      "confidence": 0.7647058823529412,
+      "lift": 10.058006535947714,
+      "relative_support": 0.18055555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=0",
+        "URL_Length=-1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.006335797254487857,
+      "confidence": 0.7500000000000001,
+      "lift": 9.864583333333336,
+      "relative_support": 0.08333333333333334,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.7142857142857143,
+      "lift": 9.39484126984127,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.7142857142857143,
+      "lift": 9.39484126984127,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=0",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.7142857142857143,
+      "lift": 9.39484126984127,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "age_of_domain=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.7142857142857143,
+      "lift": 9.39484126984127,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_Length=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 0.7,
+      "lift": 9.206944444444444,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=1",
+        "SSLfinal_State=-1",
+        "URL_Length=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 0.7,
+      "lift": 9.206944444444444,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_Length=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.007391763463569166,
+      "confidence": 0.7,
+      "lift": 9.206944444444444,
+      "relative_support": 0.09722222222222222,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=1",
+        "URL_Length=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.009503695881731784,
+      "confidence": 0.6923076923076923,
+      "lift": 9.10576923076923,
+      "relative_support": 0.125,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SSLfinal_State=1",
+        "URL_Length=1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011615628299894404,
+      "confidence": 0.6875000000000001,
+      "lift": 9.042534722222223,
+      "relative_support": 0.1527777777777778,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=-1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011615628299894404,
+      "confidence": 0.6875000000000001,
+      "lift": 9.042534722222223,
+      "relative_support": 0.1527777777777778,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "URL_Length=1",
+        "URL_of_Anchor=-1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.012671594508975714,
+      "confidence": 0.6666666666666667,
+      "lift": 8.768518518518519,
+      "relative_support": 0.16666666666666669,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "URL_of_Anchor=1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010559662090813094,
+      "confidence": 0.6666666666666667,
+      "lift": 8.768518518518519,
+      "relative_support": 0.1388888888888889,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "age_of_domain=1",
+        "popUpWidnow=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.006335797254487857,
+      "confidence": 0.6666666666666667,
+      "lift": 8.768518518518519,
+      "relative_support": 0.08333333333333334,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_Length=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.006335797254487857,
+      "confidence": 0.6666666666666667,
+      "lift": 8.768518518518519,
+      "relative_support": 0.08333333333333334,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "URL_Length=1",
+        "URL_of_Anchor=-1",
+        "popUpWidnow=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.014783526927138331,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.19444444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "URL_Length=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SSLfinal_State=-1",
+        "URL_Length=1",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SSLfinal_State=0",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=-1",
+        "SSLfinal_State=1",
+        "URL_Length=-1",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "age_of_domain=1",
+        "web_traffic=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "having_IP_Address=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "URL_Length=1",
+        "age_of_domain=1",
+        "having_IP_Address=0",
+        "web_traffic=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.004223864836325237,
+      "confidence": 0.6666666666666666,
+      "lift": 8.768518518518519,
+      "relative_support": 0.05555555555555555,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.009503695881731784,
+      "confidence": 0.6428571428571428,
+      "lift": 8.455357142857142,
+      "relative_support": 0.125,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.009503695881731784,
+      "confidence": 0.6428571428571428,
+      "lift": 8.455357142857142,
+      "relative_support": 0.125,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=1",
+        "URL_Length=1",
+        "URL_of_Anchor=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.022175290390707498,
+      "confidence": 0.6363636363636364,
+      "lift": 8.369949494949495,
+      "relative_support": 0.2916666666666667,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "URL_Length=1",
+        "URL_of_Anchor=-1",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.021119324181626188,
+      "confidence": 0.625,
+      "lift": 8.22048611111111,
+      "relative_support": 0.2777777777777778,
+      "antecedent_length": 4,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.625,
+      "lift": 8.22048611111111,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 3,
+      "class": 0
+    },
+    {
+      "antecedent": [
+        "SSLfinal_State=0",
+        "URL_Length=-1",
+        "popUpWidnow=0",
+        "web_traffic=-1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.005279831045406547,
+      "confidence": 0.625,
+      "lift": 8.22048611111111,
+      "relative_support": 0.06944444444444445,
+      "antecedent_length": 4,
+      "class": 0
+    }
+  ]
+}
