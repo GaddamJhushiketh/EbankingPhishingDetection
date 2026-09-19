@@ -3,9 +3,9 @@
 A modular Flask foundation for the final-year project **Detecting E-Banking
 Phishing Websites Using Associative Classification**.
 
-Phase 1 provides the application structure and a working Flask development
-server. The associative-classification model, dataset processing, feature
-extraction, and persistence layers are intentionally not implemented yet.
+Phase 4 provides a reproducible three-class associative classifier in
+`app/ml/associative_classifier.py`. Flask integration and live URL extraction
+remain outside this phase.
 
 ## Project structure
 
@@ -61,12 +61,29 @@ at `http://127.0.0.1:8000/health`.
 pytest
 ```
 
-## Scope boundary
+## Phase 4 training
 
-Phase 1 does not claim any phishing-detection capability or ML results.
-Dataset analysis and reusable feature/item preprocessing are now available,
-but associative-rule training, evaluation, and prediction workflows belong to
-later phases.
+Install dependencies and train from the duplicate-preserving Phase 3 dataset:
+
+```bash
+python scripts/train_associative_classifier.py
+```
+
+The script uses a fixed seed (`42`) and stratified 80/20 split, mines rules
+with mlxtend Apriori and `association_rules`, and writes
+`models/associative_classifier.pkl`, `models/evaluation.json`, and
+`models/association_rules.csv` (these are intentionally versioned
+deliverables, not ignored build output). The evaluation report includes a
+confusion matrix, full classification report, unmatched-test count, rule
+support/confidence/lift/length characteristics, confidence-threshold
+experiments, and the selected-threshold rationale. The model artifact can be loaded with
+`AssociativeClassifier.load(...)`. The report distinguishes frequent itemsets,
+all generated association rules, and filtered classification rules, and lists
+the top ten classification rules with antecedent, consequent, support,
+confidence, and lift. Matching rules are ranked by descending confidence,
+then lift, support, antecedent length, class value, and lexical antecedent
+order; the first rule supplies the prediction. A record with no matching rule
+uses the deterministically selected majority class from the training split.
 
 ## Phase 3 preprocessing contract
 

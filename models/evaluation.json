@@ -1,0 +1,273 @@
+{
+  "accuracy": 0.8523985239852399,
+  "confusion_matrix": {
+    "labels": [
+      -1,
+      0,
+      1
+    ],
+    "counts": {
+      "-1": {
+        "-1": 133,
+        "0": 0,
+        "1": 7
+      },
+      "0": {
+        "-1": 6,
+        "0": 1,
+        "1": 14
+      },
+      "1": {
+        "-1": 12,
+        "0": 1,
+        "1": 97
+      }
+    }
+  },
+  "classification_report": {
+    "-1": {
+      "precision": 0.8807947019867549,
+      "recall": 0.95,
+      "f1": 0.9140893470790377,
+      "support": 140
+    },
+    "0": {
+      "precision": 0.5,
+      "recall": 0.047619047619047616,
+      "f1": 0.08695652173913042,
+      "support": 21
+    },
+    "1": {
+      "precision": 0.8220338983050848,
+      "recall": 0.8818181818181818,
+      "f1": 0.8508771929824562,
+      "support": 110
+    },
+    "macro avg": {
+      "precision": 0.7342762000972799,
+      "recall": 0.6264790764790765,
+      "f1": 0.6173076872668748
+    },
+    "weighted avg": {
+      "precision": 0.8274353767221587,
+      "recall": 0.8523985239852399,
+      "f1": 0.8243361135633107
+    }
+  },
+  "macro_avg": {
+    "precision": 0.7342762000972799,
+    "recall": 0.6264790764790765,
+    "f1": 0.6173076872668748
+  },
+  "classes": {
+    "-1": {
+      "precision": 0.8807947019867549,
+      "recall": 0.95,
+      "f1": 0.9140893470790377,
+      "support": 140
+    },
+    "0": {
+      "precision": 0.5,
+      "recall": 0.047619047619047616,
+      "f1": 0.08695652173913042,
+      "support": 21
+    },
+    "1": {
+      "precision": 0.8220338983050848,
+      "recall": 0.8818181818181818,
+      "f1": 0.8508771929824562,
+      "support": 110
+    }
+  },
+  "n_test": 271,
+  "unmatched_test_count": 0,
+  "rule_characteristics": {
+    "count": 8102,
+    "support": {
+      "min": 0.010166358595194085,
+      "max": 0.4722735674676525,
+      "mean": 0.027215160127961834,
+      "median": 0.018484288354898338
+    },
+    "confidence": {
+      "min": 0.7,
+      "max": 1.0,
+      "mean": 0.9058867853920121,
+      "median": 0.9259259259259259
+    },
+    "lift": {
+      "min": 1.3476868327402134,
+      "max": 13.195121951219512,
+      "mean": 1.9950514885882111,
+      "median": 1.9252669039145907
+    },
+    "antecedent_length": {
+      "min": 1.0,
+      "max": 8.0,
+      "mean": 4.823994075536905,
+      "median": 5.0
+    }
+  },
+  "frequent_itemsets": 24511,
+  "generated_association_rules": 77352,
+  "filtered_classification_rules": 8102,
+  "top_classification_rules": [
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.012014787430683918,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.012014787430683918,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.011090573012939002,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010166358595194085,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "SFH=0",
+        "SSLfinal_State=0",
+        "URL_of_Anchor=0",
+        "age_of_domain=1"
+      ],
+      "consequent": "Result=Suspicious",
+      "support": 0.010166358595194085,
+      "confidence": 1.0,
+      "lift": 13.195121951219512
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.07578558225508318,
+      "confidence": 1.0,
+      "lift": 2.470319634703196
+    },
+    {
+      "antecedent": [
+        "Request_URL=-1",
+        "SFH=-1",
+        "SSLfinal_State=-1",
+        "URL_of_Anchor=-1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.06284658040665435,
+      "confidence": 1.0,
+      "lift": 2.470319634703196
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.06284658040665435,
+      "confidence": 1.0,
+      "lift": 2.470319634703196
+    },
+    {
+      "antecedent": [
+        "Request_URL=0",
+        "SFH=0",
+        "URL_of_Anchor=1",
+        "having_IP_Address=0"
+      ],
+      "consequent": "Result=Legitimate",
+      "support": 0.05545286506469501,
+      "confidence": 1.0,
+      "lift": 2.470319634703196
+    }
+  ],
+  "threshold_experiments": [
+    {
+      "min_confidence": 0.3,
+      "frequent_itemsets": 24511,
+      "generated_association_rules": 355121,
+      "n_rules": 10300,
+      "accuracy": 0.8523985239852399,
+      "macro_f1": 0.6173076872668748,
+      "unmatched_test_count": 0
+    },
+    {
+      "min_confidence": 0.5,
+      "frequent_itemsets": 24511,
+      "generated_association_rules": 168974,
+      "n_rules": 9893,
+      "accuracy": 0.8523985239852399,
+      "macro_f1": 0.6173076872668748,
+      "unmatched_test_count": 0
+    },
+    {
+      "min_confidence": 0.7,
+      "frequent_itemsets": 24511,
+      "generated_association_rules": 77352,
+      "n_rules": 8102,
+      "accuracy": 0.8523985239852399,
+      "macro_f1": 0.6173076872668748,
+      "unmatched_test_count": 0
+    }
+  ],
+  "selected_threshold": {
+    "min_confidence": 0.7,
+    "rationale": "Highest test macro-F1; ties resolved by accuracy, then higher confidence threshold."
+  },
+  "seed": 42,
+  "n_train": 1082,
+  "n_rules": 8102
+}
