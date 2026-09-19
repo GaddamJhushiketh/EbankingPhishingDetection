@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Analysis result</h1>
+{% if feature_vector_test %}<p><strong>Dataset Feature Vector Test</strong></p>{% endif %}
+{% if unavailable %}
+<p role="alert">{{ error }}</p>
+<p>No predicted class or confidence was produced.</p>
+<h2>Raw observations</h2>
+<ul>{% for name, value in observations.items() %}<li>{{ name }}: {{ value }}</li>{% endfor %}</ul>
+{% elif error %}<p role="alert">{{ error }}</p>{% else %}
+<p><strong>{{ url }}</strong>: {{ label }} ({{ prediction }})</p>
+<ul>{% for name, value in features.items() %}<li>{{ name }}: {{ value }}</li>{% endfor %}</ul>
+{% endif %}
+<a href="{{ url_for('main.index') }}">Analyze another URL</a>
+{% endblock %}

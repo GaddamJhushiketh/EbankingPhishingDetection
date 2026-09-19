@@ -4,8 +4,8 @@ A modular Flask foundation for the final-year project **Detecting E-Banking
 Phishing Websites Using Associative Classification**.
 
 Phase 4 provides a reproducible three-class associative classifier in
-`app/ml/associative_classifier.py`. Flask integration and live URL extraction
-remain outside this phase.
+`app/ml/associative_classifier.py`. Phase 5 adds integrity-checked loading,
+safe URL handling, prediction history, and SQLAlchemy persistence.
 
 ## Project structure
 
@@ -53,7 +53,50 @@ python app.py
 ```
 
 Open `http://127.0.0.1:8000/` in a browser. The health endpoint is available
-at `http://127.0.0.1:8000/health`.
+at `http://127.0.0.1:8000/health`; predictions are submitted at `/predict`
+and prior results are shown at `/history`.
+
+## Phase 5 configuration and safety
+
+The application-controlled `models/associative_classifier.pkl` is hashed with
+SHA-256 and compared in constant time when `MODEL_SHA256` is configured.
+The model artifact is a trusted application artifact and is integrity-checked
+before deserialization. Pickle files must never be accepted from untrusted
+users. SHA-256 verifies the configured artifact contents; it does not make
+pickle inherently safe.
+Development permits a missing hash (and reports degraded health if the
+artifact is missing), but production fails fast unless both `MODEL_SHA256` and
+a strong environment-provided `SECRET_KEY` are present. Development generates
+a random process-local secret when omitted; no predictable production fallback
+exists. SQLite is the deterministic default for development/tests. Set
+`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` (or
+`DATABASE_URL`) for MySQL.
+
+URL validation permits only public HTTP(S) hosts, rejects private/link-local
+DNS results, and uses bounded, revalidated redirects and response sizes.
+Prediction history stores a redacted URL without credentials, query strings,
+or fragments so the public history view does not disclose submitted secrets.
+Page-content, traffic, WHOIS, and other non-URL-observable features must be
+supplied by an explicit trusted provider; missing values are rejected rather
+than fabricated. The default URL-only strategy therefore reports a controlled
+error instead of making a prediction when those signals are unavailable.
+
+## Dataset Reproducibility Limitation
+
+This project uses the UCI Website Phishing Dataset 379. Phase 4 was trained
+on its encoded feature values. UCI confirms the feature names, allowed
+domains, and target encoding, but the available primary evidence does not
+currently establish the feature-specific rules that convert live website
+observations into those values. Consequently, `/predict` may collect raw
+observations but intentionally does not convert them into model inputs or
+produce a prediction. Missing, unverified, zero-defaulted, guessed, or
+majority-filled values are never used.
+
+The model remains usable through `/predict/features`, a clearly separated
+development/test route for complete, already encoded Dataset 379 feature
+vectors. This route does not claim that values came from the submitted URL.
+A future implementation can enable live prediction if the original
+feature-generation rules are recovered.
 
 ## Test
 

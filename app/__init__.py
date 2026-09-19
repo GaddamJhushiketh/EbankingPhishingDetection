@@ -16,8 +16,26 @@ def create_app(config_name=None):
 
     application = Flask(__name__, instance_relative_config=True)
     application.config.from_object(config_class)
+    if selected_config == "production":
+        config_class.init_app(application)
 
     Path(application.instance_path).mkdir(parents=True, exist_ok=True)
+
+    from app.models.db import db
+    db.init_app(application)
+    with application.app_context():
+        db.create_all()
+
+    from app.services.prediction import PredictionService
+    from app.utils.model_integrity import ModelIntegrityError
+    try:
+        application.extensions["prediction_service"] = PredictionService(
+            application.config["MODEL_FILE"],
+            expected_hash=application.config.get("MODEL_SHA256"),
+            production=selected_config == "production",
+        )
+    except ModelIntegrityError:
+        application.extensions["prediction_service"] = None
 
     from app.routes.main import main_blueprint
 

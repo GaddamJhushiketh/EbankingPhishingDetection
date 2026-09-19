@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dataset Feature Vector Test</h1>
+<p>This development/test path accepts an already encoded UCI Dataset 379 vector. It does not extract these values from a URL.</p>
+<form method="post" action="{{ url_for('main.predict_features') }}">
+    {% for feature in feature_columns %}
+    <label for="{{ feature }}">{{ feature }}</label>
+    <input id="{{ feature }}" name="{{ feature }}" type="number" step="1" required>
+    {% endfor %}
+    <button type="submit">Predict Feature Vector</button>
+</form>
+<a href="{{ url_for('main.index') }}">Back</a>
+{% endblock %}

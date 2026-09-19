@@ -23,6 +23,17 @@ FEATURE_COLUMNS = (
 )
 TARGET_COLUMN = "Result"
 ALLOWED_FEATURE_VALUES = frozenset({-1, 0, 1})
+FEATURE_ALLOWED_VALUES = {
+    "SFH": frozenset({-1, 0, 1}),
+    "popUpWidnow": frozenset({-1, 0, 1}),
+    "SSLfinal_State": frozenset({-1, 0, 1}),
+    "Request_URL": frozenset({-1, 0, 1}),
+    "URL_of_Anchor": frozenset({-1, 0, 1}),
+    "web_traffic": frozenset({-1, 0, 1}),
+    "URL_Length": frozenset({-1, 0, 1}),
+    "age_of_domain": frozenset({-1, 1}),
+    "having_IP_Address": frozenset({0, 1}),
+}
 ALLOWED_TARGET_VALUES = frozenset({-1, 0, 1})
 
 # This is the explicit three-class contract for the UCI Result encoding.
@@ -107,9 +118,37 @@ def feature_items(record: Mapping[str, int]) -> list[str]:
             "Live feature record contains unsupported features: " + ", ".join(extra)
         )
 
-    values = pd.DataFrame([dict(record)], columns=FEATURE_COLUMNS)
+    validated =     values = pd.DataFrame([dict(record)], columns=FEATURE_COLUMNS)
     _validate_values(values, FEATURE_COLUMNS, "Live feature")
     return [f"{column}={int(values.iloc[0][column])}" for column in FEATURE_COLUMNS]
+
+
+def validate_feature_vector(record: Mapping[str, int]) -> dict[str, int]:
+    """Validate an explicitly supplied, unlabelled Dataset 379 vector."""
+
+    missing = [column for column in FEATURE_COLUMNS if column not in record]
+    if missing:
+        raise PreprocessingError(
+            "Live feature record is missing required features: " + ", ".join(missing)
+        )
+    extra = sorted(set(record) - set(FEATURE_COLUMNS))
+    if extra:
+        raise PreprocessingError(
+            "Live feature record contains unsupported features: " + ", ".join(extra)
+        )
+    validated: dict[str, int] = {}
+    for column in FEATURE_COLUMNS:
+        try:
+            value = int(record[column])
+        except (TypeError, ValueError) as exc:
+            raise PreprocessingError(f"Feature {column!r} must be an integer") from exc
+        if value not in FEATURE_ALLOWED_VALUES[column]:
+            raise PreprocessingError(
+                f"Feature {column!r} has invalid value {value}; expected "
+                f"{sorted(FEATURE_ALLOWED_VALUES[column])}"
+            )
+        validated[column] = value
+    return validated
 
 
 def labelled_items(record: Mapping[str, int]) -> list[str]:
