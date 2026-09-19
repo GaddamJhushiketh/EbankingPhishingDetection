@@ -25,6 +25,13 @@ def index():
     return render_template("index.html")
 
 
+@main_blueprint.get("/dashboard")
+def dashboard():
+    filters, filter_error = current_app.extensions["analytics_service"].parse_filters(request.args)
+    data = current_app.extensions["analytics_service"].build_dashboard(filters)
+    return render_template("dashboard.html", **data, filters=filters, filter_error=filter_error)
+
+
 @main_blueprint.get("/health")
 def health():
     """Return a lightweight application health response."""
