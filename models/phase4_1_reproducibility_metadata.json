@@ -1,0 +1,65 @@
+{
+  "dataset": {
+    "path": "dataset/raw/phishing_dataset.csv",
+    "sha256": "ba1b5a221262c2c5d6da04ecbbea93cba879cdf56e38b385952e87a897c45c69",
+    "rows": 1353,
+    "columns": [
+      "SFH",
+      "popUpWidnow",
+      "SSLfinal_State",
+      "Request_URL",
+      "URL_of_Anchor",
+      "web_traffic",
+      "URL_Length",
+      "age_of_domain",
+      "having_IP_Address",
+      "Result"
+    ]
+  },
+  "class_mapping": {
+    "-1": "Phishy",
+    "0": "Suspicious",
+    "1": "Legitimate"
+  },
+  "split": {
+    "test_size": 0.3,
+    "random_state": 42,
+    "stratified": true,
+    "train": 947,
+    "test": 406
+  },
+  "parameters": {
+    "support": 0.002,
+    "confidence": 0.5,
+    "max_antecedent_length": 4,
+    "min_class_relative_support": 0.05,
+    "max_rules_per_class": 50,
+    "min_lift": 1.0
+  },
+  "cross_validation": {
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "training_records_only": true
+  },
+  "ranking": "confidence desc, relative_support desc, lift desc, antecedent_length asc, antecedent lexicographic asc",
+  "final_rule_counts": {
+    "-1": 50,
+    "0": 50,
+    "1": 50
+  },
+  "artifacts": {
+    "model": {
+      "path": "models\\phase4_1_associative_classifier.joblib",
+      "sha256": "ab9f51d49726ace09927cec1e604c2e0b9532f1723e4f6f77f445b505b87560d"
+    },
+    "evaluation": {
+      "path": "models/phase4_1_evaluation_results.json",
+      "sha256": "758706fb71ee55cae4d58d61fa7818c3502d9b5869ebbe72a175fa869612c0bb"
+    },
+    "rules": {
+      "path": "models\\phase4_1_classification_rules.json",
+      "sha256": "78eb9716a3c853bc17f8d6b39f1c5fc8eba90d778aa5d82bfbc02ea4fa4fc819"
+    }
+  }
+}
