@@ -26,7 +26,7 @@ class Dataset379Encoder:
                 observations.get("ssl_state"),
                 "Historical SSL state mapping is not established by the available evidence.",
             ),
-            "web_traffic": self._unresolved(
+            "web_traffic": self._provider_result(
                 observations.get("web_traffic"),
                 "The historical traffic provider and cutoff are not established.",
             ),
@@ -55,13 +55,23 @@ class Dataset379Encoder:
         }
 
     @staticmethod
-    def _unresolved(raw_value: object, explanation: str) -> dict[str, object]:
+    def _unresolved(
+        raw_value: object,
+        explanation: str,
+        status: str = "mapping_unverified",
+    ) -> dict[str, object]:
         return {
             "raw_value": raw_value,
             "encoded_value": None,
-            "mapping_status": "mapping_unverified",
+            "mapping_status": status,
             "explanation": explanation,
         }
+
+    def _provider_result(self, raw_value: object, explanation: str) -> dict[str, object]:
+        status = raw_value.get("status") if isinstance(raw_value, Mapping) else None
+        if status in {"provider_unavailable", "extraction_error"}:
+            return self._unresolved(raw_value, explanation, status)
+        return self._unresolved(raw_value, explanation)
 
     def _url_length(self, url: str) -> dict[str, object]:
         length = len(url)
@@ -148,6 +158,13 @@ class Dataset379Encoder:
     def _age(self, observations: Mapping[str, object]) -> dict[str, object]:
         months = observations.get("domain_age_months")
         if not isinstance(months, (int, float)) or isinstance(months, bool):
+            status = observations.get("domain_age_status")
+            if status in {"provider_unavailable", "extraction_error"}:
+                return self._unresolved(
+                    months,
+                    "Reliable domain-registration age was unavailable from the provider.",
+                    status,
+                )
             return self._unresolved(
                 months,
                 "Reliable domain-registration age was not supplied by a trusted source.",

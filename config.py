@@ -18,6 +18,9 @@ class Config:
     MODEL_PATH = BASE_DIR / "models"
     MODEL_FILE = MODEL_PATH / "associative_classifier.pkl"
     MODEL_SHA256 = os.getenv("MODEL_SHA256")
+    DOMAIN_INFO_PROVIDER = os.getenv("DOMAIN_INFO_PROVIDER", "whois")
+    DOMAIN_INFO_TIMEOUT = float(os.getenv("DOMAIN_INFO_TIMEOUT", "3"))
+    TRAFFIC_PROVIDER = os.getenv("TRAFFIC_PROVIDER", "")
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL") or (
         f"mysql+pymysql://{os.getenv('DB_USER', '')}:{os.getenv('DB_PASSWORD', '')}"
         f"@{os.getenv('DB_HOST', '')}:{os.getenv('DB_PORT', '3306')}/{os.getenv('DB_NAME', 'phishing')}"
