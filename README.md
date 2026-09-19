@@ -170,3 +170,66 @@ association-mining artifact is
 `dataset/processed/associative_mining_dataset.csv`. The earlier
 `phishing_dataset_deduplicated.csv` remains a separate sensitivity-analysis
 artifact.
+
+## Reproducibility and ML Workflow
+
+The authoritative input is `dataset/raw/phishing_dataset.csv`. The dataset
+validator checks the exact columns, numeric domains, missing values, duplicate
+rows, target distribution, and conflicting feature-only groups without
+modifying the raw file:
+
+```bash
+python scripts/validate_dataset.py
+```
+
+The validator writes the measured quality report to
+`models/dataset_quality.json`. The project retains duplicate rows in the
+primary training copy for association-rule support calculations; the
+deduplicated CSV is a separate sensitivity-analysis artifact. Conflicting
+feature-only groups are reported rather than silently relabelled.
+
+To reproduce the offline training/evaluation workflow explicitly:
+
+```bash
+python scripts/train_associative_classifier.py --data dataset/processed/phishing_clean.csv --seed 42 --test-size 0.2 --min-support 0.01 --min-confidence 0.5 --min-lift 1.0
+```
+
+This command uses the exact feature+target record-group split, mines rules
+from the training partition only, and rewrites the versioned model,
+evaluation, and association-rules artifacts. Run it intentionally; normal
+application startup never retrains the model. The persisted evaluation
+selects the validated `min_confidence=0.7` experiment on the fixed split.
+
+`models/reproducibility_metadata.json` records actual dataset and artifact
+hashes, dimensions, feature/target contracts, preprocessing information,
+split configuration, and training settings. `models/model_manifest.json` is a
+small registry for the existing model artifact and its evaluation summary.
+These files do not alter model loading.
+
+The offline `/predict/features` path classifies complete, already encoded
+Dataset 379 vectors. Live URL analysis is a separate workflow: it may collect
+raw observations, but it does not claim complete Dataset 379 encoding where
+authoritative feature mappings remain unavailable.
+
+## Model Explainability
+
+The feature-vector result page includes model-derived evidence from the
+association rules stored in the verified classifier artifact. Matching rules
+retain their learned support, rule confidence, lift, consequent, and
+antecedent conditions. Rules are ranked using the classifier's existing
+deterministic order: descending confidence, lift, support, antecedent length,
+class value, and lexical antecedent order. No new score is introduced.
+
+Rule confidence describes how often the rule consequent occurred in the
+training data for that antecedent; it is not a prediction probability and is
+not presented as one. Support describes the rule's observed transaction
+frequency, while lift compares the rule's consequent frequency with its
+baseline frequency. The feature analysis table reports technical Dataset 379
+feature names, submitted encoded values, allowed values, and matching-rule
+counts. It does not assign causal or positive/negative feature importance.
+
+Explanations are limited to learned rule evidence. They do not establish
+causality, and they do not add semantic interpretations that have not been
+verified for Dataset 379. Live URL analysis remains `mapping_unverified` when
+the complete authoritative encoding cannot be established; it does not run
+the classifier or produce rule explanations in that state.

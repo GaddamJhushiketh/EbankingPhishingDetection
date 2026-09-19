@@ -1,5 +1,7 @@
 """Main application routes."""
 
+from types import SimpleNamespace
+
 from flask import Blueprint, current_app, jsonify, render_template, request
 from sqlalchemy import text
 from app.models.db import PredictionHistory, db
@@ -91,7 +93,9 @@ def predict_features():
     payload = request.get_json(silent=True) or request.form
     try:
         raw_features = {column: payload.get(column) for column in FEATURE_COLUMNS}
-        prediction, features = current_app.extensions["prediction_service"].predict_features(raw_features)
+        prediction, features, explanation = current_app.extensions[
+            "prediction_service"
+        ].explain_features(raw_features)
         label = TARGET_LABELS[prediction]
         db.session.add(PredictionHistory(
             url="Dataset Feature Vector Test", prediction=prediction, label=label,
@@ -101,7 +105,7 @@ def predict_features():
         return render_template(
             "result.html", url="Dataset Feature Vector Test",
             prediction=prediction, label=label, features=features,
-            feature_vector_test=True,
+            explanation=explanation, feature_vector_test=True,
         )
     except (ValueError, FeatureExtractionError) as exc:
         db.session.rollback()
@@ -118,4 +122,23 @@ def predict_features():
 @main_blueprint.get("/history")
 def history():
     rows = PredictionHistory.query.order_by(PredictionHistory.created_at.desc()).limit(100).all()
-    return render_template("history.html", history=rows)
+    service = current_app.extensions.get("prediction_service")
+    history_rows = []
+    for row in rows:
+        rule_count = None
+        if service is not None and row.prediction_status == "predicted":
+            try:
+                rule_count = service.explanations.explain(row.features)["matching_rule_count"]
+            except (TypeError, ValueError):
+                rule_count = None
+        history_rows.append(
+            SimpleNamespace(
+                id=row.id,
+                url=row.url,
+                prediction_status=row.prediction_status,
+                label=row.label,
+                created_at=row.created_at,
+                rule_count=rule_count,
+            )
+        )
+    return render_template("history.html", history=history_rows)

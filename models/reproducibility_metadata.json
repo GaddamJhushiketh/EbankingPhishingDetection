@@ -1,0 +1,62 @@
+{
+  "metadata_schema": "phase7-reproducibility-v1",
+  "generated_at_utc": "2026-09-19T07:13:36.953427+00:00",
+  "dataset": {
+    "filename": "dataset/raw/phishing_dataset.csv",
+    "sha256": "ba1b5a221262c2c5d6da04ecbbea93cba879cdf56e38b385952e87a897c45c69",
+    "row_count": 1353,
+    "column_count": 10,
+    "feature_names": [
+      "SFH",
+      "popUpWidnow",
+      "SSLfinal_State",
+      "Request_URL",
+      "URL_of_Anchor",
+      "web_traffic",
+      "URL_Length",
+      "age_of_domain",
+      "having_IP_Address"
+    ],
+    "target_column": "Result",
+    "target_mapping": {
+      "-1": "Phishy",
+      "0": "Suspicious",
+      "1": "Legitimate"
+    },
+    "duplicate_rows": 629,
+    "unique_rows": 724,
+    "preprocessing": {
+      "validated_copy": "dataset/processed/phishing_clean.csv",
+      "validated_copy_sha256": "82bc160aa5aad88bb10865956d410bae149d33e024f068f44d4568165fe448df",
+      "primary_training_duplicates_retained": true,
+      "deduplicated_sensitivity_artifact": "dataset/processed/phishing_dataset_deduplicated.csv",
+      "conflicting_feature_groups": 48
+    }
+  },
+  "training": {
+    "command": "python scripts/train_associative_classifier.py --data dataset/processed/phishing_clean.csv --seed 42 --test-size 0.2 --min-support 0.01 --min-confidence 0.5 --min-lift 1.0",
+    "min_support": 0.01,
+    "min_confidence_argument": 0.5,
+    "selected_min_confidence": 0.7,
+    "min_lift": 1.0,
+    "random_seed": 42,
+    "test_size": 0.2,
+    "split_strategy": "exact_record_group_aware",
+    "class_handling": "three-class target mapping; exact feature+target record groups cannot cross splits",
+    "rule_mining_scope": "training partition only"
+  },
+  "artifacts": {
+    "model": {
+      "path": "models/associative_classifier.pkl",
+      "sha256": "5149828ac3bf8aae0964a484d14db67228bfd9b3679487df7e521b1bb0fe78b4"
+    },
+    "evaluation": {
+      "path": "models/evaluation.json",
+      "sha256": "40812e719bd3f7ea8d046e6269a8b1aeda9f5d659e5c568cd6a4b14ec3dac07f"
+    },
+    "association_rules": {
+      "path": "models/association_rules.csv",
+      "sha256": "6fb53a64e998588e773293c374a5c75ece1799f78679d69a913038463bf3dba6"
+    }
+  }
+}
