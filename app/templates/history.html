@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Prediction history</h1>
+<ul>{% for item in history %}
+    <li>{{ item.url }} — {{ item.prediction_status }}{% if item.label %}: {{ item.label }}{% endif %} ({{ item.created_at }})</li>
+{% else %}<li>No analysis history yet.</li>{% endfor %}</ul>
+{% endblock %}
