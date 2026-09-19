@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import ipaddress
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 
@@ -39,41 +39,55 @@ class FeatureExtractionService:
             hostname_is_ip = False
         observations: dict[str, object] = {
             "url": value,
-            "URL_Length": {"raw_value": len(value), "encoded_value": None},
-            "SSLfinal_State": {
-                "raw_value": {"scheme": parsed.scheme},
-                "encoded_value": None,
-            },
-            "having_IP_Address": {
-                "raw_value": hostname_is_ip,
-                "encoded_value": None,
-            },
+            "URL_Length": {"raw_value": len(value)},
+            "SSLfinal_State": {"raw_value": {"scheme": parsed.scheme}},
+            "having_IP_Address": {"raw_value": hostname_is_ip},
+            "hostname_is_ip": hostname_is_ip,
+            "resource_urls": [],
+            "anchor_hrefs": [],
+            "form_actions": [],
+            "popup_credential_fields": None,
+            "domain_age_months": None,
+            "ssl_state": None,
+            "web_traffic": None,
         }
         try:
             response = self.http_client.get(value)
             html = response.text
             soup = BeautifulSoup(html, "html.parser")
+            resources = []
+            for element in soup.find_all(["img", "script", "link", "video", "audio"]):
+                attribute = "href" if element.name == "link" else "src"
+                resource = element.get(attribute)
+                if resource:
+                    resources.append({"url": urljoin(value, resource), "kind": element.name})
+            observations["resource_urls"] = resources
+            observations["anchor_hrefs"] = [
+                str(anchor.get("href") or "") for anchor in soup.find_all("a")
+            ]
+            observations["form_actions"] = [
+                str(form.get("action") or "") for form in soup.find_all("form")
+            ]
+            scripts = " ".join(script.get_text(" ", strip=True) for script in soup.find_all("script"))
+            has_popup = "window.open" in scripts.lower()
+            credential_fields = soup.find_all(
+                ["input", "textarea"],
+                attrs={"type": lambda value: value and value.lower() in {"password", "email"}},
+            )
+            observations["popup_credential_fields"] = (
+                bool(has_popup and credential_fields) if has_popup else False
+            )
             observations["page"] = {
                 "status_code": response.status_code,
                 "content_type": response.headers.get("Content-Type", ""),
                 "forms": len(soup.find_all("form")),
                 "anchors": len(soup.find_all("a")),
-                "external_reference_candidates": len(
-                    soup.find_all(["img", "script", "link", "video", "audio"])
-                ),
+                "external_reference_candidates": len(resources),
             }
         except Exception:
             observations["page"] = {"status": "unavailable", "reason": "safe fetch failed"}
         for feature in FEATURE_COLUMNS:
-            observations.setdefault(
-                feature,
-                {"raw_value": None, "encoded_value": None},
-            )
-            observations[feature].setdefault("status", "mapping_unverified")
-            observations[feature].setdefault(
-                "reason",
-                "Dataset 379 feature encoding is not verified by available primary evidence",
-            )
+            observations.setdefault(feature, {"raw_value": None})
         return observations
 
     def extract(self, url: str) -> dict[str, int]:

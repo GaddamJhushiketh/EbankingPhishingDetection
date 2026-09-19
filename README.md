@@ -10,11 +10,19 @@ association-rule evidence, prediction history, a security analytics
 dashboard, reproducibility metadata, and a security-controlled live URL
 observation workflow.
 
-The application does not claim a complete live-web predictor. The available
-authoritative evidence does not establish all rules that convert live website
-observations into Dataset 379's nine encoded feature values. Live analysis
-therefore reports `feature_mapping_unavailable` instead of guessing values or
-fabricating a prediction.
+The application does not claim a complete live-web predictor for ordinary
+websites. Live URL analysis now applies only the evidence-backed Dataset 379
+rules that can be collected from the page: URL length, external resource
+percentage, external anchor percentage, form-handler (SFH), popup credential
+fields, and hostname IP status. Trusted domain-registration age is supported
+when supplied by an available provider. Empty and `javascript:` anchors remain
+in the anchor denominator but are not external; resources count `img`,
+`script`, `link`, `video`, and `audio` references. Popup JavaScript without
+credential/input fields is not treated as phishing. SSL categorical state and
+the historical web-traffic provider/cutoff remain `mapping_unverified`, and
+domain age is also unresolved without trustworthy registration data. If any
+of the nine values is unresolved, live analysis reports
+`feature_mapping_unavailable` and does not call the classifier.
 
 ## Problem statement and objectives
 
@@ -163,19 +171,20 @@ error instead of making a prediction when those signals are unavailable.
 ## Dataset Reproducibility Limitation
 
 This project uses the UCI Website Phishing Dataset 379. Phase 4 was trained
-on its encoded feature values. UCI confirms the feature names, allowed
-domains, and target encoding, but the available primary evidence does not
-currently establish the feature-specific rules that convert live website
-observations into those values. Consequently, `/predict` may collect raw
-observations but intentionally does not convert them into model inputs or
-produce a prediction. Missing, unverified, zero-defaulted, guessed, or
+on its encoded feature values. The operational live rules above are based on
+published reproductions of the Dataset 379 feature methodology, not on a
+claim that the original data-collection implementation has been recovered.
+Consequently, `/predict` converts only verified observations and does not
+produce a prediction when any required mapping is unresolved. Missing,
+unverified, zero-defaulted, guessed, or
 majority-filled values are never used.
 
 The model remains usable through `/predict/features`, a clearly separated
 development/test route for complete, already encoded Dataset 379 feature
 vectors. This route does not claim that values came from the submitted URL.
-A future implementation can enable live prediction if the original
-feature-generation rules are recovered.
+The complete nine-feature vector can therefore be produced only when a
+trusted source supplies the remaining provider-dependent observations. The
+offline evaluation metrics below are not live-web accuracy.
 
 ## Tests
 

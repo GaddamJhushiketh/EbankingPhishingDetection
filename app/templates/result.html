@@ -11,7 +11,7 @@
     <span class="eyebrow">PREDICTION STATUS</span>
     <h2 id="prediction-heading">{{ label }}</h2>
     <p class="result-meta">{{ url }}</p>
-    <p>Dataset 379-compatible feature vector tested with the existing Associative Classification model.</p>
+    <p>{% if live_analysis %}A complete encoded vector was derived from the submitted URL and classified by the existing model.{% else %}Dataset 379-compatible feature vector tested with the existing Associative Classification model.{% endif %}</p>
 </section>
 <section class="explanation-card" aria-labelledby="evidence-heading">
     <span class="eyebrow">MODEL-DERIVED EVIDENCE</span>
@@ -33,7 +33,7 @@
 </section>
 <section class="analysis-card" aria-labelledby="feature-analysis-heading">
     <span class="eyebrow">FEATURE ANALYSIS</span>
-    <h2 id="feature-analysis-heading">Submitted encoded values</h2>
+    <h2 id="feature-analysis-heading">{% if live_analysis %}Extracted encoded values{% else %}Submitted encoded values{% endif %}</h2>
     <div class="table-wrap"><table><thead><tr><th>Feature</th><th>Submitted value</th><th>Allowed values</th><th>Rule evidence</th></tr></thead><tbody>
     {% for item in explanation.feature_evidence %}<tr><td><code>{{ item.name }}</code></td><td><strong>{{ item.value }}</strong></td><td>{{ item.allowed_values|join(', ') }}</td><td>{{ item.matching_rule_count }} matching rule{{ '' if item.matching_rule_count == 1 else 's' }}</td></tr>{% endfor %}
     </tbody></table></div>
