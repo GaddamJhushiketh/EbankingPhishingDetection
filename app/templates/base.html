@@ -7,8 +7,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <main class="container">
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="{{ url_for('main.index') }}">
+                <span class="brand-mark" aria-hidden="true">◎</span>
+                <span><strong>PhishGuard</strong><small>Associative Classification Lab</small></span>
+            </a>
+            <nav class="nav" aria-label="Primary navigation">
+                <a href="{{ url_for('main.index') }}">Dashboard</a>
+                <a href="{{ url_for('main.predict') }}">Live Analysis</a>
+                <a href="{{ url_for('main.predict_features') }}">Feature Test</a>
+                <a href="{{ url_for('main.history') }}">History</a>
+                <a href="{{ url_for('main.system_status') }}">System Status</a>
+            </nav>
+        </div>
+    </header>
+    <main class="shell page-shell">
         {% block content %}{% endblock %}
     </main>
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <span>Detecting E-Banking Phishing Websites</span>
+            <span>Flask · Python · Associative Classification · Academic project</span>
+        </div>
+    </footer>
 </body>
 </html>

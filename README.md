@@ -7,6 +7,16 @@ Phase 4 provides a reproducible three-class associative classifier in
 `app/ml/associative_classifier.py`. Phase 5 adds integrity-checked loading,
 safe URL handling, prediction history, and SQLAlchemy persistence.
 
+## Phase 6 interface
+
+The application now includes a responsive cybersecurity-oriented interface
+with Dashboard, Live Analysis, Dataset Feature Vector Test, History, and
+System Status pages. Live analysis remains intentionally separate from the
+feature-vector test: it may display safe raw observations, but it does not
+invent Dataset 379 encodings or call the model when mappings are unavailable.
+The feature-vector test accepts a complete validated Dataset 379 vector and
+uses the existing Phase 4 classifier without confidence estimates.
+
 ## Project structure
 
 ```text
